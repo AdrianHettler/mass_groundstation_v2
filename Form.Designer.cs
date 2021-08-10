@@ -29,9 +29,16 @@ namespace mass_groundstation_v2
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabConnection = new System.Windows.Forms.TabPage();
+            this.btnConnectionClearTCPList = new System.Windows.Forms.Button();
             this.lblTcpPort = new System.Windows.Forms.Label();
             this.lblUdpPort = new System.Windows.Forms.Label();
             this.lblGsIP = new System.Windows.Forms.Label();
@@ -42,9 +49,13 @@ namespace mass_groundstation_v2
             this.tbConnectionExpIP = new System.Windows.Forms.TextBox();
             this.tabAmbient = new System.Windows.Forms.TabPage();
             this.groupAmbientPressure = new System.Windows.Forms.GroupBox();
+            this.trackbarScalingAmbPressure = new System.Windows.Forms.TrackBar();
+            this.chartPressure = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tbAmbientPressure = new System.Windows.Forms.TextBox();
             this.lblAmbientPressure = new System.Windows.Forms.Label();
             this.groupAmbientTemperature = new System.Windows.Forms.GroupBox();
+            this.trackbarScalingAmbTemperature = new System.Windows.Forms.TrackBar();
+            this.chartTemperature = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblAmbientTemperatureOutside = new System.Windows.Forms.Label();
             this.tbAmbientTemperatureOutside = new System.Windows.Forms.TextBox();
             this.lblAmbientTemperatureInside = new System.Windows.Forms.Label();
@@ -108,14 +119,28 @@ namespace mass_groundstation_v2
             this.rtbLogs = new System.Windows.Forms.RichTextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusStripLabelLog = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnConnectionClearTCPList = new System.Windows.Forms.Button();
+            this.statusStripAlignment = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripTCPDescription = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripTCP = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripPingDescription = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripPing = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripFlightTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timerStopWatch = new System.Windows.Forms.Timer(this.components);
+            this.timerConnectionTest = new System.Windows.Forms.Timer(this.components);
+            this.tabCamera = new System.Windows.Forms.TabPage();
+            this.groupCameraLive = new System.Windows.Forms.GroupBox();
+            this.pictureBoxLive = new System.Windows.Forms.PictureBox();
             this.tabControlMain.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTcpPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUdpPort)).BeginInit();
             this.tabAmbient.SuspendLayout();
             this.groupAmbientPressure.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackbarScalingAmbPressure)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartPressure)).BeginInit();
             this.groupAmbientTemperature.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackbarScalingAmbTemperature)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTemperature)).BeginInit();
             this.tabExperiment.SuspendLayout();
             this.groupExpManualInflation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureExpLogo)).BeginInit();
@@ -130,6 +155,9 @@ namespace mass_groundstation_v2
             ((System.ComponentModel.ISupportInitialize)(this.picExpPower)).BeginInit();
             this.tabLogs.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.tabCamera.SuspendLayout();
+            this.groupCameraLive.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLive)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -138,6 +166,7 @@ namespace mass_groundstation_v2
             this.tabControlMain.Controls.Add(this.tabAmbient);
             this.tabControlMain.Controls.Add(this.tabExperiment);
             this.tabControlMain.Controls.Add(this.tabLogs);
+            this.tabControlMain.Controls.Add(this.tabCamera);
             this.tabControlMain.Location = new System.Drawing.Point(3, 3);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
@@ -162,6 +191,16 @@ namespace mass_groundstation_v2
             this.tabConnection.TabIndex = 0;
             this.tabConnection.Text = "Connection";
             this.tabConnection.UseVisualStyleBackColor = true;
+            // 
+            // btnConnectionClearTCPList
+            // 
+            this.btnConnectionClearTCPList.Location = new System.Drawing.Point(339, 33);
+            this.btnConnectionClearTCPList.Name = "btnConnectionClearTCPList";
+            this.btnConnectionClearTCPList.Size = new System.Drawing.Size(219, 23);
+            this.btnConnectionClearTCPList.TabIndex = 8;
+            this.btnConnectionClearTCPList.Text = "Clear TCP Commandlist";
+            this.btnConnectionClearTCPList.UseVisualStyleBackColor = true;
+            this.btnConnectionClearTCPList.Click += new System.EventHandler(this.button_click_handler_misc);
             // 
             // lblTcpPort
             // 
@@ -257,6 +296,8 @@ namespace mass_groundstation_v2
             // 
             // groupAmbientPressure
             // 
+            this.groupAmbientPressure.Controls.Add(this.trackbarScalingAmbPressure);
+            this.groupAmbientPressure.Controls.Add(this.chartPressure);
             this.groupAmbientPressure.Controls.Add(this.tbAmbientPressure);
             this.groupAmbientPressure.Controls.Add(this.lblAmbientPressure);
             this.groupAmbientPressure.Location = new System.Drawing.Point(790, 6);
@@ -265,6 +306,32 @@ namespace mass_groundstation_v2
             this.groupAmbientPressure.TabIndex = 1;
             this.groupAmbientPressure.TabStop = false;
             this.groupAmbientPressure.Text = "Pressure";
+            // 
+            // trackbarScalingAmbPressure
+            // 
+            this.trackbarScalingAmbPressure.AccessibleName = "";
+            this.trackbarScalingAmbPressure.Location = new System.Drawing.Point(279, 746);
+            this.trackbarScalingAmbPressure.Maximum = 100;
+            this.trackbarScalingAmbPressure.Minimum = 1;
+            this.trackbarScalingAmbPressure.Name = "trackbarScalingAmbPressure";
+            this.trackbarScalingAmbPressure.Size = new System.Drawing.Size(250, 45);
+            this.trackbarScalingAmbPressure.TabIndex = 7;
+            this.trackbarScalingAmbPressure.Value = 30;
+            this.trackbarScalingAmbPressure.Scroll += new System.EventHandler(this.trackbarScalingAmbPressure_Scroll);
+            // 
+            // chartPressure
+            // 
+            chartArea5.Name = "ChartArea1";
+            this.chartPressure.ChartAreas.Add(chartArea5);
+            this.chartPressure.Location = new System.Drawing.Point(6, 63);
+            this.chartPressure.Name = "chartPressure";
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Name = "pressure";
+            this.chartPressure.Series.Add(series7);
+            this.chartPressure.Size = new System.Drawing.Size(763, 696);
+            this.chartPressure.TabIndex = 2;
+            this.chartPressure.Text = "chart2";
             // 
             // tbAmbientPressure
             // 
@@ -285,6 +352,8 @@ namespace mass_groundstation_v2
             // 
             // groupAmbientTemperature
             // 
+            this.groupAmbientTemperature.Controls.Add(this.trackbarScalingAmbTemperature);
+            this.groupAmbientTemperature.Controls.Add(this.chartTemperature);
             this.groupAmbientTemperature.Controls.Add(this.lblAmbientTemperatureOutside);
             this.groupAmbientTemperature.Controls.Add(this.tbAmbientTemperatureOutside);
             this.groupAmbientTemperature.Controls.Add(this.lblAmbientTemperatureInside);
@@ -295,6 +364,37 @@ namespace mass_groundstation_v2
             this.groupAmbientTemperature.TabIndex = 0;
             this.groupAmbientTemperature.TabStop = false;
             this.groupAmbientTemperature.Text = "Temperature";
+            // 
+            // trackbarScalingAmbTemperature
+            // 
+            this.trackbarScalingAmbTemperature.AccessibleName = "";
+            this.trackbarScalingAmbTemperature.Location = new System.Drawing.Point(279, 746);
+            this.trackbarScalingAmbTemperature.Maximum = 100;
+            this.trackbarScalingAmbTemperature.Minimum = 1;
+            this.trackbarScalingAmbTemperature.Name = "trackbarScalingAmbTemperature";
+            this.trackbarScalingAmbTemperature.Size = new System.Drawing.Size(250, 45);
+            this.trackbarScalingAmbTemperature.TabIndex = 6;
+            this.trackbarScalingAmbTemperature.Value = 30;
+            this.trackbarScalingAmbTemperature.Scroll += new System.EventHandler(this.trackbarScalingAmbTemperature_Scroll);
+            // 
+            // chartTemperature
+            // 
+            chartArea6.Name = "ChartArea1";
+            this.chartTemperature.ChartAreas.Add(chartArea6);
+            this.chartTemperature.Location = new System.Drawing.Point(6, 63);
+            this.chartTemperature.Name = "chartTemperature";
+            this.chartTemperature.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Name = "temperatureInside";
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Name = "temperatureOutside";
+            this.chartTemperature.Series.Add(series8);
+            this.chartTemperature.Series.Add(series9);
+            this.chartTemperature.Size = new System.Drawing.Size(763, 696);
+            this.chartTemperature.TabIndex = 5;
+            this.chartTemperature.Text = "chart1";
             // 
             // lblAmbientTemperatureOutside
             // 
@@ -936,9 +1036,16 @@ namespace mass_groundstation_v2
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusStripLabelLog});
-            this.statusStrip.Location = new System.Drawing.Point(0, 863);
+            this.statusStripLabelLog,
+            this.statusStripAlignment,
+            this.statusStripTCPDescription,
+            this.statusStripTCP,
+            this.statusStripPingDescription,
+            this.statusStripPing,
+            this.statusStripFlightTime});
+            this.statusStrip.Location = new System.Drawing.Point(0, 859);
             this.statusStrip.Name = "statusStrip";
+            this.statusStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.statusStrip.Size = new System.Drawing.Size(1584, 22);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
@@ -949,21 +1056,92 @@ namespace mass_groundstation_v2
             this.statusStripLabelLog.Size = new System.Drawing.Size(12, 17);
             this.statusStripLabelLog.Text = "-";
             // 
-            // btnConnectionClearTCPList
+            // statusStripAlignment
             // 
-            this.btnConnectionClearTCPList.Location = new System.Drawing.Point(339, 33);
-            this.btnConnectionClearTCPList.Name = "btnConnectionClearTCPList";
-            this.btnConnectionClearTCPList.Size = new System.Drawing.Size(219, 23);
-            this.btnConnectionClearTCPList.TabIndex = 8;
-            this.btnConnectionClearTCPList.Text = "Clear TCP Commandlist";
-            this.btnConnectionClearTCPList.UseVisualStyleBackColor = true;
-            this.btnConnectionClearTCPList.Click += new System.EventHandler(this.button_click_handler_misc);
+            this.statusStripAlignment.Name = "statusStripAlignment";
+            this.statusStripAlignment.Size = new System.Drawing.Size(1142, 17);
+            this.statusStripAlignment.Spring = true;
+            // 
+            // statusStripTCPDescription
+            // 
+            this.statusStripTCPDescription.Name = "statusStripTCPDescription";
+            this.statusStripTCPDescription.Size = new System.Drawing.Size(30, 17);
+            this.statusStripTCPDescription.Text = "TCP:";
+            // 
+            // statusStripTCP
+            // 
+            this.statusStripTCP.ForeColor = System.Drawing.Color.Red;
+            this.statusStripTCP.Name = "statusStripTCP";
+            this.statusStripTCP.Size = new System.Drawing.Size(86, 17);
+            this.statusStripTCP.Text = "Not connected";
+            // 
+            // statusStripPingDescription
+            // 
+            this.statusStripPingDescription.Margin = new System.Windows.Forms.Padding(30, 3, 0, 2);
+            this.statusStripPingDescription.Name = "statusStripPingDescription";
+            this.statusStripPingDescription.Size = new System.Drawing.Size(34, 17);
+            this.statusStripPingDescription.Text = "Ping:";
+            // 
+            // statusStripPing
+            // 
+            this.statusStripPing.ForeColor = System.Drawing.Color.Red;
+            this.statusStripPing.Margin = new System.Windows.Forms.Padding(0, 3, 30, 2);
+            this.statusStripPing.Name = "statusStripPing";
+            this.statusStripPing.Size = new System.Drawing.Size(86, 17);
+            this.statusStripPing.Text = "Not connected";
+            // 
+            // statusStripFlightTime
+            // 
+            this.statusStripFlightTime.Name = "statusStripFlightTime";
+            this.statusStripFlightTime.Size = new System.Drawing.Size(119, 17);
+            this.statusStripFlightTime.Text = "Flight Time - 00:00:00";
+            // 
+            // timerStopWatch
+            // 
+            this.timerStopWatch.Interval = 1000;
+            this.timerStopWatch.Tick += new System.EventHandler(this.timerStopWatch_Tick);
+            // 
+            // timerConnectionTest
+            // 
+            this.timerConnectionTest.Enabled = true;
+            this.timerConnectionTest.Interval = 1000;
+            this.timerConnectionTest.Tick += new System.EventHandler(this.timerConnectionTest_Tick);
+            // 
+            // tabCamera
+            // 
+            this.tabCamera.Controls.Add(this.groupCameraLive);
+            this.tabCamera.Location = new System.Drawing.Point(4, 22);
+            this.tabCamera.Name = "tabCamera";
+            this.tabCamera.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCamera.Size = new System.Drawing.Size(1571, 830);
+            this.tabCamera.TabIndex = 4;
+            this.tabCamera.Text = "Camera";
+            this.tabCamera.UseVisualStyleBackColor = true;
+            // 
+            // groupCameraLive
+            // 
+            this.groupCameraLive.Controls.Add(this.pictureBoxLive);
+            this.groupCameraLive.Location = new System.Drawing.Point(6, 180);
+            this.groupCameraLive.Name = "groupCameraLive";
+            this.groupCameraLive.Size = new System.Drawing.Size(1559, 644);
+            this.groupCameraLive.TabIndex = 0;
+            this.groupCameraLive.TabStop = false;
+            this.groupCameraLive.Text = "Live View";
+            // 
+            // pictureBoxLive
+            // 
+            this.pictureBoxLive.Location = new System.Drawing.Point(143, 32);
+            this.pictureBoxLive.Name = "pictureBoxLive";
+            this.pictureBoxLive.Size = new System.Drawing.Size(1289, 585);
+            this.pictureBoxLive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLive.TabIndex = 0;
+            this.pictureBoxLive.TabStop = false;
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1584, 885);
+            this.ClientSize = new System.Drawing.Size(1584, 881);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControlMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -977,8 +1155,12 @@ namespace mass_groundstation_v2
             this.tabAmbient.ResumeLayout(false);
             this.groupAmbientPressure.ResumeLayout(false);
             this.groupAmbientPressure.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackbarScalingAmbPressure)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartPressure)).EndInit();
             this.groupAmbientTemperature.ResumeLayout(false);
             this.groupAmbientTemperature.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackbarScalingAmbTemperature)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTemperature)).EndInit();
             this.tabExperiment.ResumeLayout(false);
             this.groupExpManualInflation.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureExpLogo)).EndInit();
@@ -998,6 +1180,9 @@ namespace mass_groundstation_v2
             this.tabLogs.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.tabCamera.ResumeLayout(false);
+            this.groupCameraLive.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLive)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1083,8 +1268,23 @@ namespace mass_groundstation_v2
         public System.Windows.Forms.Button btnExpInflationOnValve2;
         public System.Windows.Forms.Button btnExpInflationOnValve1;
         public System.Windows.Forms.CheckBox cbLogsEnableLogFile;
-        private System.Windows.Forms.Button btnExpLiftOff;
-        private System.Windows.Forms.Button btnConnectionClearTCPList;
+        public System.Windows.Forms.Button btnExpLiftOff;
+        public System.Windows.Forms.Button btnConnectionClearTCPList;
+        public System.Windows.Forms.ToolStripStatusLabel statusStripAlignment;
+        public System.Windows.Forms.ToolStripStatusLabel statusStripFlightTime;
+        public System.Windows.Forms.Timer timerStopWatch;
+        public System.Windows.Forms.ToolStripStatusLabel statusStripPing;
+        public System.Windows.Forms.ToolStripStatusLabel statusStripTCPDescription;
+        public System.Windows.Forms.ToolStripStatusLabel statusStripTCP;
+        public System.Windows.Forms.ToolStripStatusLabel statusStripPingDescription;
+        public System.Windows.Forms.Timer timerConnectionTest;
+        public System.Windows.Forms.DataVisualization.Charting.Chart chartPressure;
+        public System.Windows.Forms.DataVisualization.Charting.Chart chartTemperature;
+        private System.Windows.Forms.TrackBar trackbarScalingAmbTemperature;
+        private System.Windows.Forms.TrackBar trackbarScalingAmbPressure;
+        private System.Windows.Forms.TabPage tabCamera;
+        private System.Windows.Forms.GroupBox groupCameraLive;
+        public System.Windows.Forms.PictureBox pictureBoxLive;
     }
 }
 

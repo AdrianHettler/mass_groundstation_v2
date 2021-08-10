@@ -8,7 +8,9 @@ using System.Threading;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
-
+using Helper = mass_groundstation_v2.helper.helper;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace mass_groundstation_v2.network
 {
@@ -24,7 +26,8 @@ namespace mass_groundstation_v2.network
             ambient = 100,
             power = 101,
             pneumatics = 102,
-            gyro = 103
+            gyro = 103,
+            picture = 104
         }
 
         public void udp_thread()
@@ -40,9 +43,36 @@ namespace mass_groundstation_v2.network
                     switch ((udp_message_id)received_bytes[0])
                     {
                         case udp_message_id.ambient: //ambient conditions data
-                            helper.helper.change_text_box(Program.main_form.tbAmbientTemperatureInside, BitConverter.ToSingle(received_bytes, 1).ToString() + " °C");
-                            helper.helper.change_text_box(Program.main_form.tbAmbientTemperatureOutside, BitConverter.ToSingle(received_bytes, 5).ToString() + " °C");
-                            helper.helper.change_text_box(Program.main_form.tbAmbientPressure, BitConverter.ToSingle(received_bytes, 9).ToString() + " mbar");
+                            float ambient_temperature_inside = BitConverter.ToSingle(received_bytes, 1);
+                            float ambient_temperature_outside = BitConverter.ToSingle(received_bytes, 5);
+                            float ambient_pressure = BitConverter.ToSingle(received_bytes, 9);
+
+                            Helper.change_text_box(Program.main_form.tbAmbientTemperatureInside, ambient_temperature_inside.ToString() + " °C");
+                            Helper.change_text_box(Program.main_form.tbAmbientTemperatureOutside, ambient_temperature_outside.ToString() + " °C");
+                            Helper.change_text_box(Program.main_form.tbAmbientPressure, ambient_pressure.ToString() + " mbar");
+
+                            if(Program.main_form.lift_off)
+                            {
+                                TimeSpan time = DateTime.Now - Program.main_form.stop_watch_start_time;
+
+                                Helper.chart_add_xy(Program.main_form.chartTemperature, "temperatureInside", time, ambient_temperature_inside);
+                                Helper.chart_add_xy(Program.main_form.chartTemperature, "temperatureOutside", time, ambient_temperature_outside);
+                                Helper.chart_add_xy(Program.main_form.chartPressure, "pressure", time, ambient_pressure);
+                            }
+
+                          //  string output_text = DateTime.Now.ToString("HH:mm:ss;") +ambient_temperature_inside.ToString()+";" + ambient_temperature_outside.ToString() +";"+ ambient_pressure.ToString();
+
+                           // TimeSpan duration = DateTime.Now - stop_watch_start_time;
+                           // statusStripFlightTime.Text = "Flight Time - " + duration.ToString(@"hh\:mm\:ss");
+
+
+                            //Helper.write_log(output_text, Path.Combine(Program.application_path + "\\" + Program.application_start_time, "log_file_" + Program.application_start_time + ".txt"));
+
+
+
+                            //write_log(output_text, Path.Combine("C:\\bexus_logs\\" + Program.application_start_time, "log_file_" + Program.application_start_time + ".txt"));
+
+
                             break;
 
                         case udp_message_id.power: //power data
@@ -52,13 +82,33 @@ namespace mass_groundstation_v2.network
                             float current_ex = BitConverter.ToSingle(received_bytes, 13);
                             float power_bx = voltage_bx * current_bx; // power calculation W = V*A
                             float power_ex = voltage_ex * current_ex;
-                            helper.helper.change_text_box(Program.main_form.tbExpPowerVoltageBX, voltage_bx.ToString() + " V");
-                            helper.helper.change_text_box(Program.main_form.tbExpPowerVoltageEX, voltage_ex.ToString() + " V");
-                            helper.helper.change_text_box(Program.main_form.tbExpPowerCurrentBX, current_bx.ToString() + " A");
-                            helper.helper.change_text_box(Program.main_form.tbExpPowerCurrentEX, current_ex.ToString() + " A");
-                            helper.helper.change_text_box(Program.main_form.tbExpPowerPowerBX, power_bx.ToString() + " W");
-                            helper.helper.change_text_box(Program.main_form.tbExpPowerPowerEX, power_ex.ToString() + " W");
+                            Helper.change_text_box(Program.main_form.tbExpPowerVoltageBX, voltage_bx.ToString() + " V");
+                            Helper.change_text_box(Program.main_form.tbExpPowerVoltageEX, voltage_ex.ToString() + " V");
+                            Helper.change_text_box(Program.main_form.tbExpPowerCurrentBX, current_bx.ToString() + " A");
+                            Helper.change_text_box(Program.main_form.tbExpPowerCurrentEX, current_ex.ToString() + " A");
+                            Helper.change_text_box(Program.main_form.tbExpPowerPowerBX, power_bx.ToString() + " W");
+                            Helper.change_text_box(Program.main_form.tbExpPowerPowerEX, power_ex.ToString() + " W");
                             break;
+
+                        case udp_message_id.picture:
+                            Byte[] picture_data = received_bytes.Skip(3).ToArray();
+                            Program.main_form.frame_bmp.SetLine(BitConverter.ToUInt16(received_bytes, 1), picture_data);
+
+                            if (BitConverter.ToUInt16(received_bytes, 1) == 305)
+                            {
+                                Program.main_form.pictureBoxLive.Invoke((MethodInvoker)delegate
+                                {
+                                    Program.main_form.pictureBoxLive.Image = Program.main_form.frame_bmp.Bitmap;
+                                });
+
+                            }
+
+
+
+
+                            break;
+
+
 
                     }
 

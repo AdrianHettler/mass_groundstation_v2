@@ -8,6 +8,10 @@ using System.Net.Sockets;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.IO;
+using System.Drawing;
+using Helper = mass_groundstation_v2.helper.helper;
+
+
 
 namespace mass_groundstation_v2.network
 {
@@ -15,11 +19,13 @@ namespace mass_groundstation_v2.network
     {
         blank = 0,
         ok = 1,
-        tvp_ping = 2,
+        tcp_ping = 2,
         tcp_pong = 3,
         udp_pong = 4,
         reset = 5,
         ping = 6,
+        error_unknown_msg_id = 252,
+        error_buffer_size  = 253,
         error = 254,
 
         exp_init = 20,
@@ -42,7 +48,7 @@ namespace mass_groundstation_v2.network
         public string success_text;
         public string error_text;
 
-        public tcp_command(tcp_message_id message_id_, byte[] data_, tcp_message_id expected_return_value_, string success_text_, string error_text_)
+        public tcp_command(tcp_message_id message_id_, byte[] data_ , tcp_message_id expected_return_value_ = tcp_message_id.blank, string success_text_ = "", string error_text_ = "")
         {
             message_id = message_id_;
             data = data_;
@@ -97,55 +103,81 @@ namespace mass_groundstation_v2.network
                         }
                     }
 
-                    if (tcp_connected && tcp_command_list.Count > 0) //check if tcp is connected && a tcp command is in command list
+                    if(tcp_command_list.Count > 0)
                     {
-                        try
+                        if (tcp_command_list[0].message_id == tcp_message_id.ping) //ping check (tcp not required)
                         {
-                            bool transfer_successful = false;
+                            PingReply reply = Helper.ping_ip(Program.main_form.tbConnectionExpIP.Text);
 
-                            if (stream.CanWrite)
+                            if (reply.Status == IPStatus.Success)
+                                Helper.change_label(Program.main_form.statusStripPing, reply.RoundtripTime.ToString() + " ms", reply.RoundtripTime < 50 ? Color.Green : Color.Orange);
+                            else
+                                Helper.change_label(Program.main_form.statusStripPing, "Not connected", Color.Red);
+
+                            tcp_command_list.RemoveAt(0); // remove the processed first entry from command list
+                        }
+                        else if (tcp_connected) //check if tcp is connected && a tcp command is in command list
+                        {
+                            try
                             {
-                                var mem_stream = new MemoryStream(); //memory stream to append byte array: byte array = (byte)message_id + (byte[])data;
-                                mem_stream.WriteByte((byte)tcp_command_list[0].message_id);
-                                mem_stream.Write(tcp_command_list[0].data, 0, tcp_command_list[0].data.Length);
-                                
-                                byte[] message = mem_stream.ToArray();
-
-                               stream.Write(message, 0, message.Length);
-
-                                if (stream.CanRead)
+                                if (stream.CanWrite)
                                 {
-                                    byte[] message_receive = new byte[client.ReceiveBufferSize];
-                                    int bytesRead = stream.Read(message_receive, 0, client.ReceiveBufferSize);
-
-                                    if ((tcp_message_id)message_receive[0] == tcp_command_list[0].expected_return_value)
+                                    if (tcp_command_list[0].message_id == tcp_message_id.tcp_ping) //special tcp commands with different returns
                                     {
-                                        transfer_successful = true;
-                                        helper.helper.print_log(tcp_command_list[0].success_text);
-                                    }                                       
-                                    else
-                                        helper.helper.print_log(tcp_command_list[0].error_text + "- Return: " + message_receive[0].ToString());
+                                        byte[] message = new byte[] { (byte)tcp_command_list[0].message_id };
+                                        stream.Write(message, 0, message.Length);
+
+                                        if (stream.CanRead)
+                                        {
+                                            byte[] message_receive = new byte[client.ReceiveBufferSize];
+                                            int bytesRead = stream.Read(message_receive, 0, client.ReceiveBufferSize);
+
+                                            if ((tcp_message_id)message_receive[0] == tcp_message_id.tcp_pong)
+                                                Helper.change_label(Program.main_form.statusStripTCP, "Connected", Color.Green);                                                                                          
+                                            else
+                                                Helper.change_label(Program.main_form.statusStripTCP, "Not Connected", Color.Red);
+                                        }
+                                        tcp_command_list.RemoveAt(0); // remove the processed first entry from command list
+                                    }
+                                    else //standard tcp commands
+                                    {
+                                        var mem_stream = new MemoryStream(); //memory stream to append byte array: byte array = (byte)message_id + (byte[])data;
+                                        mem_stream.WriteByte((byte)tcp_command_list[0].message_id);
+                                        mem_stream.Write(tcp_command_list[0].data, 0, tcp_command_list[0].data.Length);
+
+                                        byte[] message = mem_stream.ToArray();
+
+                                        stream.Write(message, 0, message.Length);
+
+                                        if (stream.CanRead)
+                                        {
+                                            byte[] message_receive = new byte[client.ReceiveBufferSize];
+                                            int bytesRead = stream.Read(message_receive, 0, client.ReceiveBufferSize);
+
+                                            if ((tcp_message_id)message_receive[0] == tcp_command_list[0].expected_return_value)
+                                            {
+                                                Helper.print_log(tcp_command_list[0].success_text);
+                                                tcp_command_list.RemoveAt(0); // remove the processed first entry from command list
+                                            }
+                                            else
+                                                Helper.print_log(tcp_command_list[0].error_text + "- Return: " + message_receive[0].ToString());
+                                        }
+                                    }
                                 }
                             }
-
-                            if(transfer_successful)
+                            catch (Exception except)
                             {
-                                tcp_command_list.RemoveAt(0); // remove the first entry from command list
+                                client.Close();
+                                tcp_connected = false;
+                                Helper.print_log("TCP READ/WRITE ERROR - Exception: " + except.Message);
+                                Helper.change_label(Program.main_form.statusStripTCP, "NOT CONNECTED", Color.Red);
                             }
-                        }
-                        catch (Exception except)
-                        {
-                            client.Close();
-                            tcp_connected = false;
-                            helper.helper.print_log("TCP READ/WRITE ERROR - Exception: " + except.Message);
-
-                            //  Helper.change_label(label_TCP_STATUS_OUTPUT, "NOT CONNECTED", Color.Red, false);
                         }
                     }
                 }
                 catch (Exception except)
                 {
-                    helper.helper.print_log("TCP THREAD EXCEPTION: " + except.Message);
+                    Helper.print_log("TCP THREAD EXCEPTION: " + except.Message);
                 }
             }
         }

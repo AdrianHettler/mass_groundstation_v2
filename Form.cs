@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using System.Net.Sockets;
+using System.Net.NetworkInformation;
+using Helper = mass_groundstation_v2.helper.helper;
 
 namespace mass_groundstation_v2
 {
@@ -26,10 +30,44 @@ namespace mass_groundstation_v2
     {
         private network.udp udp_client;
         private network.tcp tcp_client;
+        public helper.direct_bitmap frame_bmp = new helper.direct_bitmap(800, 612);
+        public DateTime stop_watch_start_time;
+        public bool lift_off = false;
+
+
+        private void init_charts() //init ambient condition charts
+        {
+            chartTemperature.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm";
+            chartTemperature.Series[0].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTimeOffset;
+            chartTemperature.ChartAreas[0].AxisX.Minimum = 0;
+            chartTemperature.ChartAreas[0].AxisX.Maximum = 0.417;
+            chartTemperature.ChartAreas[0].AxisY.Minimum = -70;
+            chartTemperature.ChartAreas[0].AxisY.Maximum = 40;
+            chartTemperature.ChartAreas[0].AxisY.Interval = 5;
+            chartTemperature.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
+            chartTemperature.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
+            chartTemperature.ChartAreas[0].AxisX.Title = "Time in [h]";
+            chartTemperature.ChartAreas[0].AxisY.Title = "Temperature in [°C]";
+            chartTemperature.Series[0].Color = Color.Red;
+            chartTemperature.Series[1].Color = Color.Blue;
+
+            chartPressure.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm";
+            chartPressure.Series[0].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTimeOffset;
+            chartPressure.ChartAreas[0].AxisX.Minimum = 0;
+            chartPressure.ChartAreas[0].AxisX.Maximum = 0.417;
+            chartPressure.ChartAreas[0].AxisY.Minimum = 0;
+            chartPressure.ChartAreas[0].AxisY.Maximum = 1200;
+            chartPressure.ChartAreas[0].AxisY.Interval = 100;
+            chartPressure.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
+            chartPressure.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
+            chartPressure.ChartAreas[0].AxisX.Title = "Time in [h]";
+            chartPressure.ChartAreas[0].AxisY.Title = "Pressure in [hPa]";
+        }
 
         public Form()
         {
             InitializeComponent();
+            init_charts();
 
             udp_client = new network.udp(tbConnectionExpIP.Text,(int)numUdpPort.Value); //start udp thread and init udp
             tcp_client = new network.tcp(); //start tcp thread
@@ -42,9 +80,13 @@ namespace mass_groundstation_v2
             switch (btn.Name)
             {
                 case "btnExpLiftOff": //Lift Off Button
-                    helper.helper.print_log("Lift Off!");
+                    Helper.print_log("Lift Off!");
+                    stop_watch_start_time = DateTime.Now;
+                    timerStopWatch.Start();
+                    lift_off = true;
                     break;
-                case "btnConnectionClearTCPList":
+
+                case "btnConnectionClearTCPList": //clear tcp command list
                     tcp_client.tcp_command_list.Clear();
                     break;
                 default:
@@ -130,6 +172,30 @@ namespace mass_groundstation_v2
                 default:
                     break;
             }
-        }    
+        }
+
+        private void timerStopWatch_Tick(object sender, EventArgs e) //update lift off stop watch
+        {
+            TimeSpan duration = DateTime.Now - stop_watch_start_time;
+            statusStripFlightTime.Text = "Flight Time - "+ duration.ToString(@"hh\:mm\:ss");
+        }
+
+        private void timerConnectionTest_Tick(object sender, EventArgs e)
+        {
+            tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.ping, new byte[] { }));
+            tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.tcp_ping, new byte[] { }));
+        }
+
+        private void trackbarScalingAmbTemperature_Scroll(object sender, EventArgs e)
+        {
+            chartTemperature.ChartAreas[0].AxisX.Maximum = 0.417*trackbarScalingAmbTemperature.Value/100f;
+        }
+
+        private void trackbarScalingAmbPressure_Scroll(object sender, EventArgs e)
+        {
+            chartPressure.ChartAreas[0].AxisX.Maximum = 0.417 * trackbarScalingAmbPressure.Value / 100f;
+        }
+
+       
     }
 }

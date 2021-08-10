@@ -18,11 +18,35 @@ namespace mass_groundstation_v2.helper
 {
     public static class helper
     {
+        public static PingReply ping_ip(string ip)
+        {
+            Ping p = new Ping();
+            PingReply r = p.Send(ip);
+            return r;
+        }
+
         public static void change_label(Label lbl, string text, Color col)
         {
             if (lbl.InvokeRequired)
             {
                 lbl.Invoke((MethodInvoker)delegate
+                {
+                    lbl.Text = text;
+                    lbl.ForeColor = col;
+                });
+            }
+            else
+            {
+                lbl.Text = text;
+                lbl.ForeColor = col;
+            }
+        }
+
+        public static void change_label(ToolStripStatusLabel lbl, string text, Color col)
+        {          
+            if (lbl.GetCurrentParent().InvokeRequired)
+            {
+                lbl.GetCurrentParent().Invoke((MethodInvoker)delegate
                 {
                     lbl.Text = text;
                     lbl.ForeColor = col;
@@ -57,6 +81,23 @@ namespace mass_groundstation_v2.helper
             }
         }
 
+        public static void chart_add_xy(System.Windows.Forms.DataVisualization.Charting.Chart chart,string series, TimeSpan x, float y)
+        {
+            if (chart.InvokeRequired)
+            {
+                chart.Invoke((MethodInvoker)delegate
+                {
+                    chart.Series[series].Points.AddXY(new DateTime() + x, y);
+                });
+            }
+            else
+            {
+                chart.Series[series].Points.AddXY(new DateTime() + x, y);
+            }           
+        }
+
+
+
         public static void print_log(string message)
         {
             string output_text = DateTime.Now.ToString("HH:mm:ss  -  ") + message; // add time to output
@@ -83,6 +124,8 @@ namespace mass_groundstation_v2.helper
             {
                 rtb.AppendText(output_text);  // add text to OutputTextBox
                 rtb.AppendText(Environment.NewLine); // new line
+                Program.main_form.statusStripLabelLog.Text = output_text;
+                Program.main_form.statusStrip.Refresh();
             }
 
 
