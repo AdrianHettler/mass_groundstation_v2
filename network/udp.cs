@@ -60,13 +60,17 @@ namespace mass_groundstation_v2.network
                                 Helper.chart_add_xy(Program.main_form.chartPressure, "pressure", time, ambient_pressure);
                             }
 
-                          //  string output_text = DateTime.Now.ToString("HH:mm:ss;") +ambient_temperature_inside.ToString()+";" + ambient_temperature_outside.ToString() +";"+ ambient_pressure.ToString();
+
+                            string output_text = DateTime.Now.ToString("HH:mm:ss;") +ambient_temperature_inside.ToString()+";" + ambient_temperature_outside.ToString() +";"+ ambient_pressure.ToString();
 
                            // TimeSpan duration = DateTime.Now - stop_watch_start_time;
                            // statusStripFlightTime.Text = "Flight Time - " + duration.ToString(@"hh\:mm\:ss");
 
 
-                            //Helper.write_log(output_text, Path.Combine(Program.application_path + "\\" + Program.application_start_time, "log_file_" + Program.application_start_time + ".txt"));
+                           // Helper.write_log(output_text, Path.Combine(Program.application_path + "\\" + Program.application_start_time, "log_file_" + Program.application_start_time + ".txt"));
+
+                            Helper.write_log(output_text, Path.Combine("C:\\bexus_logs\\" + Program.application_start_time, "amb_log_file_" + Program.application_start_time + ".txt"));
+                            Helper.write_log(output_text, Path.Combine(Program.application_path + "\\" + Program.application_start_time, "amb_log_file_" + Program.application_start_time + ".txt"));
 
 
 
@@ -88,11 +92,26 @@ namespace mass_groundstation_v2.network
                             Helper.change_text_box(Program.main_form.tbExpPowerCurrentEX, current_ex.ToString() + " A");
                             Helper.change_text_box(Program.main_form.tbExpPowerPowerBX, power_bx.ToString() + " W");
                             Helper.change_text_box(Program.main_form.tbExpPowerPowerEX, power_ex.ToString() + " W");
+
+                            string log_power = DateTime.Now.ToString("HH:mm:ss;") + voltage_bx.ToString() + ";" + voltage_ex.ToString() + ";" + current_bx.ToString() + ";" + current_ex.ToString() + ";" + power_bx.ToString() + ";" + power_ex.ToString();
+
+                          
+                            Helper.write_log(log_power, Path.Combine("C:\\bexus_logs\\" + Program.application_start_time, "power_log_file_" + Program.application_start_time + ".txt"));
+                            Helper.write_log(log_power, Path.Combine(Program.application_path + "\\" + Program.application_start_time, "power_log_file_" + Program.application_start_time + ".txt"));
+
+
+
                             break;
 
                         case udp_message_id.picture:
-                            Byte[] picture_data = received_bytes.Skip(3).ToArray();
+                            //if (BitConverter.ToUInt16(received_bytes, 1) == 0)
+                            //{
+                            //    Program.main_form.frame_bmp.Bitmap.Clear
+                            //}
+                                Byte[] picture_data = received_bytes.Skip(3).ToArray();
                             Program.main_form.frame_bmp.SetLine(BitConverter.ToUInt16(received_bytes, 1), picture_data);
+
+
 
                             if (BitConverter.ToUInt16(received_bytes, 1) == 305)
                             {
@@ -103,6 +122,23 @@ namespace mass_groundstation_v2.network
 
                             }
 
+                            break;
+
+                        case udp_message_id.pneumatics: //power data
+                            float pressure_structures_outside =  BitConverter.ToSingle(received_bytes, 1); //convert byte array to float
+                            float pressure_structures_inside = BitConverter.ToSingle(received_bytes, 5);
+                            float pressure_tank = ((BitConverter.ToSingle(received_bytes, 9)-0.1f)/9.9f)*16;
+
+                            Helper.change_text_box(Program.main_form.tbExpPneuInsideStructuresPressure, pressure_structures_inside.ToString() + " mbar");
+                            Helper.change_text_box(Program.main_form.tbExpPneuOutsideStructuresPressure, pressure_structures_outside.ToString() + " mbar");
+                            Helper.change_text_box(Program.main_form.tbExpPneuTankPressure, pressure_tank.ToString() + " bar");
+
+
+                            string log_pneu = DateTime.Now.ToString("HH:mm:ss;") + pressure_structures_outside.ToString() + ";" + pressure_structures_inside.ToString() + ";" + pressure_tank.ToString();
+
+
+                            Helper.write_log(log_pneu, Path.Combine("C:\\bexus_logs\\" + Program.application_start_time, "pneu_log_file_" + Program.application_start_time + ".txt"));
+                            Helper.write_log(log_pneu, Path.Combine(Program.application_path + "\\" + Program.application_start_time, "pneu_log_file_" + Program.application_start_time + ".txt"));
 
 
 

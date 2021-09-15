@@ -23,7 +23,9 @@ namespace mass_groundstation_v2
         valve_1 = 4,
         valve_2 = 5,
         valve_3 = 6,
-        valve_4 = 7
+        valve_4 = 7,
+        structures_inside = 8,
+        structures_outside = 9
     }
 
     public partial class Form : System.Windows.Forms.Form
@@ -102,20 +104,28 @@ namespace mass_groundstation_v2
             {
                 case "btnExpHDRMInside": //HDRM
                     data = new byte[] { (byte)device_id.pin_puller_1,(byte)numExpHDRMActivationTimeInside.Value }; //device_id,activation_time
-                   tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_release_structures, data, network.tcp_message_id.ok, "Exp. Release Structure Command SUCCESS - Inside Structures", "Exp. Release Structure Command FAIL - Outside Structures"));            
+                   tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_release_structures, data, network.tcp_message_id.ok, "Exp. Release Structure Command SUCCESS - Inside Structures", "Exp. Release Structure Command FAIL - Inside Structures"));            
                     break;
                 case "btnExpHDRMOutside":
                     data = new byte[] { (byte)device_id.pin_puller_2, (byte)numExpHDRMActivationTimeOutside.Value }; //device_id,activation_time
-                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_release_structures, data, network.tcp_message_id.ok, "Exp. Release Structure Command SUCCESS - Inside Structures", "Exp. Release Structure Command FAIL - Outside Structures"));
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_release_structures, data, network.tcp_message_id.ok, "Exp. Release Structure Command SUCCESS - Outside Structures", "Exp. Release Structure Command FAIL - Outside Structures"));
                     break;
 
                 case "btnExpInflationStartInside": //Automated Inflation
+                    data = new byte[] { (byte)device_id.structures_inside }; //device_id,inflation time
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_start_inflation, data, network.tcp_message_id.ok, "Exp. Start Inflation SUCCESS - Inside Structures", "Exp. Start Inflation FAIL - Inside Structures"));
                     break;
                 case "btnExpInflationStopInside":
+                    data = new byte[] { (byte)device_id.structures_inside }; //device_id,inflation time
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_stop_inflation, data, network.tcp_message_id.ok, "Exp. Stop Inflation SUCCESS - Inside Structures", "Exp. Stop Inflation FAIL - Inside Structures"));
                     break;
-                case "btnExpInflationStartOutside":
+                case "btnExpInflationStartOutside": //Automated Inflation
+                    data = new byte[] { (byte)device_id.structures_outside }; //device_id,inflation time
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_start_inflation, data, network.tcp_message_id.ok, "Exp. Start Inflation SUCCESS - Outside Structures", "Exp. Start Inflation FAIL - Outside Structures"));
                     break;
                 case "btnExpInflationStopOutside":
+                    data = new byte[] { (byte)device_id.structures_outside }; //device_id,inflation time
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_stop_inflation, data, network.tcp_message_id.ok, "Exp. Stop Inflation SUCCESS - Outside Structures", "Exp. Stop Inflation FAIL - Outside Structures"));
                     break;
 
                 case "btnExpLedOnStructure1": //LEDs
@@ -169,6 +179,35 @@ namespace mass_groundstation_v2
                     tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_valves_manual_off, data, network.tcp_message_id.ok, "Exp. VALVE OFF SUCCESS - Valve 4", "Exp. VALVE OFF FAIL - Valve 4"));
                     break;
 
+                case "btnCamInside":
+                     data = new byte[] { }; //device_id
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_live_inside, data, network.tcp_message_id.ok, "Exp. CAM LIVE INSIDE SUCCESS", "Exp. CAM LIVE INSIDE FAIL"));
+                    break;
+                case "btnCamOutside":
+                    data = new byte[] { }; //device_id
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_live_outside, data, network.tcp_message_id.ok, "Exp. CAM LIVE OUTSIDE SUCCESS", "Exp. CAM LIVE OUTSIDE FAIL"));
+                    break;
+
+                case "btnCamStartLive":
+                    data = new byte[] { }; //device_id
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_live_start, data, network.tcp_message_id.ok, "Exp. CAM LIVE DTART INSIDE SUCCESS", "Exp. CAM LIVE START INSIDE FAIL"));
+                    break;
+
+                case "btnCamStopLive":
+                    data = new byte[] { }; //device_id
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_live_stop, data, network.tcp_message_id.ok, "Exp. CAM LIVE STOP INSIDE SUCCESS", "Exp. CAM LIVE STOP INSIDE FAIL"));
+                    break;
+
+                case "btnExpValve3Pulse":
+                    data = new byte[] { (byte)device_id.valve_3,(byte)numV3PulseTime.Value,(byte)numPulseV3Multi.Value }; //device_id
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_valves_pulse, data, network.tcp_message_id.ok, "Exp. PULSE SUCCESS", "Exp. PULSE FAIL"));
+                    break;
+                case "btnExpValve1Pulse":
+                    data = new byte[] { (byte)device_id.valve_1, (byte)numV1PulseTime.Value, (byte)numPulseV1Multi.Value }; //device_id
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_valves_pulse, data, network.tcp_message_id.ok, "Exp. PULSE SUCCESS", "Exp. PULSE FAIL"));
+                    break;
+
+
                 default:
                     break;
             }
@@ -182,8 +221,23 @@ namespace mass_groundstation_v2
 
         private void timerConnectionTest_Tick(object sender, EventArgs e)
         {
-            tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.ping, new byte[] { }));
-            tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.tcp_ping, new byte[] { }));
+            bool ping = true;
+            bool tcp_ping = true;
+
+            for(int i = 0; i < tcp_client.tcp_command_list.Count;i++)
+            {
+                if (tcp_client.tcp_command_list[i].message_id == network.tcp_message_id.ping)
+                    ping = false;
+
+                if (tcp_client.tcp_command_list[i].message_id == network.tcp_message_id.tcp_ping)
+                    tcp_ping = false;
+            }
+
+            if(ping)
+                tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.ping, new byte[] { }));
+
+            if(tcp_ping)
+                tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.tcp_ping, new byte[] { }));
         }
 
         private void trackbarScalingAmbTemperature_Scroll(object sender, EventArgs e)

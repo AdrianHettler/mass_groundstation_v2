@@ -30,11 +30,11 @@ namespace mass_groundstation_v2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabConnection = new System.Windows.Forms.TabPage();
@@ -63,6 +63,10 @@ namespace mass_groundstation_v2
             this.tabExperiment = new System.Windows.Forms.TabPage();
             this.btnExpLiftOff = new System.Windows.Forms.Button();
             this.groupExpManualInflation = new System.Windows.Forms.GroupBox();
+            this.numV3PulseTime = new System.Windows.Forms.NumericUpDown();
+            this.numV1PulseTime = new System.Windows.Forms.NumericUpDown();
+            this.btnExpValve3Pulse = new System.Windows.Forms.Button();
+            this.btnExpValve1Pulse = new System.Windows.Forms.Button();
             this.btnExpInflationOffValve4 = new System.Windows.Forms.Button();
             this.btnExpInflationOffValve3 = new System.Windows.Forms.Button();
             this.btnExpInflationOffValve2 = new System.Windows.Forms.Button();
@@ -117,6 +121,13 @@ namespace mass_groundstation_v2
             this.tabLogs = new System.Windows.Forms.TabPage();
             this.cbLogsEnableLogFile = new System.Windows.Forms.CheckBox();
             this.rtbLogs = new System.Windows.Forms.RichTextBox();
+            this.tabCamera = new System.Windows.Forms.TabPage();
+            this.btnCamStopLive = new System.Windows.Forms.Button();
+            this.btnCamStartLive = new System.Windows.Forms.Button();
+            this.btnCamOutside = new System.Windows.Forms.Button();
+            this.btnCamInside = new System.Windows.Forms.Button();
+            this.groupCameraLive = new System.Windows.Forms.GroupBox();
+            this.pictureBoxLive = new System.Windows.Forms.PictureBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusStripLabelLog = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripAlignment = new System.Windows.Forms.ToolStripStatusLabel();
@@ -127,9 +138,8 @@ namespace mass_groundstation_v2
             this.statusStripFlightTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerStopWatch = new System.Windows.Forms.Timer(this.components);
             this.timerConnectionTest = new System.Windows.Forms.Timer(this.components);
-            this.tabCamera = new System.Windows.Forms.TabPage();
-            this.groupCameraLive = new System.Windows.Forms.GroupBox();
-            this.pictureBoxLive = new System.Windows.Forms.PictureBox();
+            this.numPulseV1Multi = new System.Windows.Forms.NumericUpDown();
+            this.numPulseV3Multi = new System.Windows.Forms.NumericUpDown();
             this.tabControlMain.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTcpPort)).BeginInit();
@@ -143,6 +153,8 @@ namespace mass_groundstation_v2
             ((System.ComponentModel.ISupportInitialize)(this.chartTemperature)).BeginInit();
             this.tabExperiment.SuspendLayout();
             this.groupExpManualInflation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numV3PulseTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numV1PulseTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureExpLogo)).BeginInit();
             this.groupExpPneu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureExpPneu)).BeginInit();
@@ -154,10 +166,12 @@ namespace mass_groundstation_v2
             this.groupExpPower.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picExpPower)).BeginInit();
             this.tabLogs.SuspendLayout();
-            this.statusStrip.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupCameraLive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLive)).BeginInit();
+            this.statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPulseV1Multi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPulseV3Multi)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -321,14 +335,14 @@ namespace mass_groundstation_v2
             // 
             // chartPressure
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chartPressure.ChartAreas.Add(chartArea5);
+            chartArea1.Name = "ChartArea1";
+            this.chartPressure.ChartAreas.Add(chartArea1);
             this.chartPressure.Location = new System.Drawing.Point(6, 63);
             this.chartPressure.Name = "chartPressure";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Name = "pressure";
-            this.chartPressure.Series.Add(series7);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "pressure";
+            this.chartPressure.Series.Add(series1);
             this.chartPressure.Size = new System.Drawing.Size(763, 696);
             this.chartPressure.TabIndex = 2;
             this.chartPressure.Text = "chart2";
@@ -379,19 +393,19 @@ namespace mass_groundstation_v2
             // 
             // chartTemperature
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chartTemperature.ChartAreas.Add(chartArea6);
+            chartArea2.Name = "ChartArea1";
+            this.chartTemperature.ChartAreas.Add(chartArea2);
             this.chartTemperature.Location = new System.Drawing.Point(6, 63);
             this.chartTemperature.Name = "chartTemperature";
             this.chartTemperature.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Name = "temperatureInside";
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Name = "temperatureOutside";
-            this.chartTemperature.Series.Add(series8);
-            this.chartTemperature.Series.Add(series9);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Name = "temperatureInside";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Name = "temperatureOutside";
+            this.chartTemperature.Series.Add(series2);
+            this.chartTemperature.Series.Add(series3);
             this.chartTemperature.Size = new System.Drawing.Size(763, 696);
             this.chartTemperature.TabIndex = 5;
             this.chartTemperature.Text = "chart1";
@@ -461,6 +475,12 @@ namespace mass_groundstation_v2
             // 
             // groupExpManualInflation
             // 
+            this.groupExpManualInflation.Controls.Add(this.numPulseV3Multi);
+            this.groupExpManualInflation.Controls.Add(this.numPulseV1Multi);
+            this.groupExpManualInflation.Controls.Add(this.numV3PulseTime);
+            this.groupExpManualInflation.Controls.Add(this.numV1PulseTime);
+            this.groupExpManualInflation.Controls.Add(this.btnExpValve3Pulse);
+            this.groupExpManualInflation.Controls.Add(this.btnExpValve1Pulse);
             this.groupExpManualInflation.Controls.Add(this.btnExpInflationOffValve4);
             this.groupExpManualInflation.Controls.Add(this.btnExpInflationOffValve3);
             this.groupExpManualInflation.Controls.Add(this.btnExpInflationOffValve2);
@@ -476,11 +496,65 @@ namespace mass_groundstation_v2
             this.groupExpManualInflation.TabStop = false;
             this.groupExpManualInflation.Text = "Manual Inflation";
             // 
+            // numV3PulseTime
+            // 
+            this.numV3PulseTime.Location = new System.Drawing.Point(562, 89);
+            this.numV3PulseTime.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numV3PulseTime.Name = "numV3PulseTime";
+            this.numV3PulseTime.Size = new System.Drawing.Size(63, 20);
+            this.numV3PulseTime.TabIndex = 16;
+            this.numV3PulseTime.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // numV1PulseTime
+            // 
+            this.numV1PulseTime.Location = new System.Drawing.Point(562, 31);
+            this.numV1PulseTime.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numV1PulseTime.Name = "numV1PulseTime";
+            this.numV1PulseTime.Size = new System.Drawing.Size(63, 20);
+            this.numV1PulseTime.TabIndex = 15;
+            this.numV1PulseTime.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // btnExpValve3Pulse
+            // 
+            this.btnExpValve3Pulse.Location = new System.Drawing.Point(400, 86);
+            this.btnExpValve3Pulse.Name = "btnExpValve3Pulse";
+            this.btnExpValve3Pulse.Size = new System.Drawing.Size(156, 23);
+            this.btnExpValve3Pulse.TabIndex = 14;
+            this.btnExpValve3Pulse.Text = "Valve 3 - PULSE";
+            this.btnExpValve3Pulse.UseVisualStyleBackColor = true;
+            this.btnExpValve3Pulse.Click += new System.EventHandler(this.button_click_handler_commands);
+            // 
+            // btnExpValve1Pulse
+            // 
+            this.btnExpValve1Pulse.Location = new System.Drawing.Point(400, 28);
+            this.btnExpValve1Pulse.Name = "btnExpValve1Pulse";
+            this.btnExpValve1Pulse.Size = new System.Drawing.Size(156, 23);
+            this.btnExpValve1Pulse.TabIndex = 13;
+            this.btnExpValve1Pulse.Text = "Valve 1 - PULSE";
+            this.btnExpValve1Pulse.UseVisualStyleBackColor = true;
+            this.btnExpValve1Pulse.Click += new System.EventHandler(this.button_click_handler_commands);
+            // 
             // btnExpInflationOffValve4
             // 
-            this.btnExpInflationOffValve4.Location = new System.Drawing.Point(402, 115);
+            this.btnExpInflationOffValve4.Location = new System.Drawing.Point(245, 115);
             this.btnExpInflationOffValve4.Name = "btnExpInflationOffValve4";
-            this.btnExpInflationOffValve4.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationOffValve4.Size = new System.Drawing.Size(149, 23);
             this.btnExpInflationOffValve4.TabIndex = 12;
             this.btnExpInflationOffValve4.Text = "Valve 4 - OFF";
             this.btnExpInflationOffValve4.UseVisualStyleBackColor = true;
@@ -488,9 +562,9 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOffValve3
             // 
-            this.btnExpInflationOffValve3.Location = new System.Drawing.Point(402, 86);
+            this.btnExpInflationOffValve3.Location = new System.Drawing.Point(245, 86);
             this.btnExpInflationOffValve3.Name = "btnExpInflationOffValve3";
-            this.btnExpInflationOffValve3.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationOffValve3.Size = new System.Drawing.Size(149, 23);
             this.btnExpInflationOffValve3.TabIndex = 11;
             this.btnExpInflationOffValve3.Text = "Valve 3 - OFF";
             this.btnExpInflationOffValve3.UseVisualStyleBackColor = true;
@@ -498,9 +572,9 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOffValve2
             // 
-            this.btnExpInflationOffValve2.Location = new System.Drawing.Point(402, 57);
+            this.btnExpInflationOffValve2.Location = new System.Drawing.Point(245, 57);
             this.btnExpInflationOffValve2.Name = "btnExpInflationOffValve2";
-            this.btnExpInflationOffValve2.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationOffValve2.Size = new System.Drawing.Size(149, 23);
             this.btnExpInflationOffValve2.TabIndex = 10;
             this.btnExpInflationOffValve2.Text = "Valve 2 - OFF";
             this.btnExpInflationOffValve2.UseVisualStyleBackColor = true;
@@ -508,9 +582,9 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOffValve1
             // 
-            this.btnExpInflationOffValve1.Location = new System.Drawing.Point(402, 28);
+            this.btnExpInflationOffValve1.Location = new System.Drawing.Point(245, 28);
             this.btnExpInflationOffValve1.Name = "btnExpInflationOffValve1";
-            this.btnExpInflationOffValve1.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationOffValve1.Size = new System.Drawing.Size(149, 23);
             this.btnExpInflationOffValve1.TabIndex = 9;
             this.btnExpInflationOffValve1.Text = "Valve 1 - OFF";
             this.btnExpInflationOffValve1.UseVisualStyleBackColor = true;
@@ -520,7 +594,7 @@ namespace mass_groundstation_v2
             // 
             this.btnExpInflationOnValve4.Location = new System.Drawing.Point(83, 115);
             this.btnExpInflationOnValve4.Name = "btnExpInflationOnValve4";
-            this.btnExpInflationOnValve4.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationOnValve4.Size = new System.Drawing.Size(156, 23);
             this.btnExpInflationOnValve4.TabIndex = 8;
             this.btnExpInflationOnValve4.Text = "Valve 4 - ON";
             this.btnExpInflationOnValve4.UseVisualStyleBackColor = true;
@@ -530,7 +604,7 @@ namespace mass_groundstation_v2
             // 
             this.btnExpInflationOnValve3.Location = new System.Drawing.Point(83, 86);
             this.btnExpInflationOnValve3.Name = "btnExpInflationOnValve3";
-            this.btnExpInflationOnValve3.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationOnValve3.Size = new System.Drawing.Size(156, 23);
             this.btnExpInflationOnValve3.TabIndex = 7;
             this.btnExpInflationOnValve3.Text = "Valve 3 - ON";
             this.btnExpInflationOnValve3.UseVisualStyleBackColor = true;
@@ -540,7 +614,7 @@ namespace mass_groundstation_v2
             // 
             this.btnExpInflationOnValve2.Location = new System.Drawing.Point(83, 57);
             this.btnExpInflationOnValve2.Name = "btnExpInflationOnValve2";
-            this.btnExpInflationOnValve2.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationOnValve2.Size = new System.Drawing.Size(156, 23);
             this.btnExpInflationOnValve2.TabIndex = 6;
             this.btnExpInflationOnValve2.Text = "Valve 2 - ON";
             this.btnExpInflationOnValve2.UseVisualStyleBackColor = true;
@@ -550,7 +624,7 @@ namespace mass_groundstation_v2
             // 
             this.btnExpInflationOnValve1.Location = new System.Drawing.Point(83, 28);
             this.btnExpInflationOnValve1.Name = "btnExpInflationOnValve1";
-            this.btnExpInflationOnValve1.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationOnValve1.Size = new System.Drawing.Size(156, 23);
             this.btnExpInflationOnValve1.TabIndex = 5;
             this.btnExpInflationOnValve1.Text = "Valve 1 - ON";
             this.btnExpInflationOnValve1.UseVisualStyleBackColor = true;
@@ -1033,8 +1107,83 @@ namespace mass_groundstation_v2
             this.rtbLogs.TabIndex = 0;
             this.rtbLogs.Text = "";
             // 
+            // tabCamera
+            // 
+            this.tabCamera.Controls.Add(this.btnCamStopLive);
+            this.tabCamera.Controls.Add(this.btnCamStartLive);
+            this.tabCamera.Controls.Add(this.btnCamOutside);
+            this.tabCamera.Controls.Add(this.btnCamInside);
+            this.tabCamera.Controls.Add(this.groupCameraLive);
+            this.tabCamera.Location = new System.Drawing.Point(4, 22);
+            this.tabCamera.Name = "tabCamera";
+            this.tabCamera.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCamera.Size = new System.Drawing.Size(1571, 830);
+            this.tabCamera.TabIndex = 4;
+            this.tabCamera.Text = "Camera";
+            this.tabCamera.UseVisualStyleBackColor = true;
+            // 
+            // btnCamStopLive
+            // 
+            this.btnCamStopLive.Location = new System.Drawing.Point(260, 56);
+            this.btnCamStopLive.Name = "btnCamStopLive";
+            this.btnCamStopLive.Size = new System.Drawing.Size(119, 23);
+            this.btnCamStopLive.TabIndex = 4;
+            this.btnCamStopLive.Text = "Stop Live View";
+            this.btnCamStopLive.UseVisualStyleBackColor = true;
+            this.btnCamStopLive.Click += new System.EventHandler(this.button_click_handler_commands);
+            // 
+            // btnCamStartLive
+            // 
+            this.btnCamStartLive.Location = new System.Drawing.Point(260, 27);
+            this.btnCamStartLive.Name = "btnCamStartLive";
+            this.btnCamStartLive.Size = new System.Drawing.Size(119, 23);
+            this.btnCamStartLive.TabIndex = 3;
+            this.btnCamStartLive.Text = "Start Live View";
+            this.btnCamStartLive.UseVisualStyleBackColor = true;
+            this.btnCamStartLive.Click += new System.EventHandler(this.button_click_handler_commands);
+            // 
+            // btnCamOutside
+            // 
+            this.btnCamOutside.Location = new System.Drawing.Point(61, 56);
+            this.btnCamOutside.Name = "btnCamOutside";
+            this.btnCamOutside.Size = new System.Drawing.Size(151, 23);
+            this.btnCamOutside.TabIndex = 2;
+            this.btnCamOutside.Text = "Switch Live View Outside";
+            this.btnCamOutside.UseVisualStyleBackColor = true;
+            this.btnCamOutside.Click += new System.EventHandler(this.button_click_handler_commands);
+            // 
+            // btnCamInside
+            // 
+            this.btnCamInside.Location = new System.Drawing.Point(61, 27);
+            this.btnCamInside.Name = "btnCamInside";
+            this.btnCamInside.Size = new System.Drawing.Size(151, 23);
+            this.btnCamInside.TabIndex = 1;
+            this.btnCamInside.Text = "Switch Live View Inside";
+            this.btnCamInside.UseVisualStyleBackColor = true;
+            this.btnCamInside.Click += new System.EventHandler(this.button_click_handler_commands);
+            // 
+            // groupCameraLive
+            // 
+            this.groupCameraLive.Controls.Add(this.pictureBoxLive);
+            this.groupCameraLive.Location = new System.Drawing.Point(6, 180);
+            this.groupCameraLive.Name = "groupCameraLive";
+            this.groupCameraLive.Size = new System.Drawing.Size(1559, 644);
+            this.groupCameraLive.TabIndex = 0;
+            this.groupCameraLive.TabStop = false;
+            this.groupCameraLive.Text = "Live View";
+            // 
+            // pictureBoxLive
+            // 
+            this.pictureBoxLive.Location = new System.Drawing.Point(143, 32);
+            this.pictureBoxLive.Name = "pictureBoxLive";
+            this.pictureBoxLive.Size = new System.Drawing.Size(1289, 585);
+            this.pictureBoxLive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLive.TabIndex = 0;
+            this.pictureBoxLive.TabStop = false;
+            // 
             // statusStrip
             // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusStripLabelLog,
             this.statusStripAlignment,
@@ -1043,10 +1192,10 @@ namespace mass_groundstation_v2
             this.statusStripPingDescription,
             this.statusStripPing,
             this.statusStripFlightTime});
-            this.statusStrip.Location = new System.Drawing.Point(0, 859);
+            this.statusStrip.Location = new System.Drawing.Point(0, 740);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.statusStrip.Size = new System.Drawing.Size(1584, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1012, 22);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -1059,7 +1208,7 @@ namespace mass_groundstation_v2
             // statusStripAlignment
             // 
             this.statusStripAlignment.Name = "statusStripAlignment";
-            this.statusStripAlignment.Size = new System.Drawing.Size(1142, 17);
+            this.statusStripAlignment.Size = new System.Drawing.Size(570, 17);
             this.statusStripAlignment.Spring = true;
             // 
             // statusStripTCPDescription
@@ -1107,41 +1256,35 @@ namespace mass_groundstation_v2
             this.timerConnectionTest.Interval = 1000;
             this.timerConnectionTest.Tick += new System.EventHandler(this.timerConnectionTest_Tick);
             // 
-            // tabCamera
+            // numPulseV1Multi
             // 
-            this.tabCamera.Controls.Add(this.groupCameraLive);
-            this.tabCamera.Location = new System.Drawing.Point(4, 22);
-            this.tabCamera.Name = "tabCamera";
-            this.tabCamera.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCamera.Size = new System.Drawing.Size(1571, 830);
-            this.tabCamera.TabIndex = 4;
-            this.tabCamera.Text = "Camera";
-            this.tabCamera.UseVisualStyleBackColor = true;
+            this.numPulseV1Multi.Location = new System.Drawing.Point(631, 31);
+            this.numPulseV1Multi.Name = "numPulseV1Multi";
+            this.numPulseV1Multi.Size = new System.Drawing.Size(63, 20);
+            this.numPulseV1Multi.TabIndex = 17;
+            this.numPulseV1Multi.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
-            // groupCameraLive
+            // numPulseV3Multi
             // 
-            this.groupCameraLive.Controls.Add(this.pictureBoxLive);
-            this.groupCameraLive.Location = new System.Drawing.Point(6, 180);
-            this.groupCameraLive.Name = "groupCameraLive";
-            this.groupCameraLive.Size = new System.Drawing.Size(1559, 644);
-            this.groupCameraLive.TabIndex = 0;
-            this.groupCameraLive.TabStop = false;
-            this.groupCameraLive.Text = "Live View";
-            // 
-            // pictureBoxLive
-            // 
-            this.pictureBoxLive.Location = new System.Drawing.Point(143, 32);
-            this.pictureBoxLive.Name = "pictureBoxLive";
-            this.pictureBoxLive.Size = new System.Drawing.Size(1289, 585);
-            this.pictureBoxLive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxLive.TabIndex = 0;
-            this.pictureBoxLive.TabStop = false;
+            this.numPulseV3Multi.Location = new System.Drawing.Point(631, 89);
+            this.numPulseV3Multi.Name = "numPulseV3Multi";
+            this.numPulseV3Multi.Size = new System.Drawing.Size(63, 20);
+            this.numPulseV3Multi.TabIndex = 18;
+            this.numPulseV3Multi.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1584, 881);
+            this.ClientSize = new System.Drawing.Size(1012, 762);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControlMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1163,6 +1306,8 @@ namespace mass_groundstation_v2
             ((System.ComponentModel.ISupportInitialize)(this.chartTemperature)).EndInit();
             this.tabExperiment.ResumeLayout(false);
             this.groupExpManualInflation.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numV3PulseTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numV1PulseTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureExpLogo)).EndInit();
             this.groupExpPneu.ResumeLayout(false);
             this.groupExpPneu.PerformLayout();
@@ -1178,11 +1323,13 @@ namespace mass_groundstation_v2
             ((System.ComponentModel.ISupportInitialize)(this.picExpPower)).EndInit();
             this.tabLogs.ResumeLayout(false);
             this.tabLogs.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.tabCamera.ResumeLayout(false);
             this.groupCameraLive.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLive)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPulseV1Multi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPulseV3Multi)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1285,6 +1432,16 @@ namespace mass_groundstation_v2
         private System.Windows.Forms.TabPage tabCamera;
         private System.Windows.Forms.GroupBox groupCameraLive;
         public System.Windows.Forms.PictureBox pictureBoxLive;
+        private System.Windows.Forms.Button btnCamOutside;
+        private System.Windows.Forms.Button btnCamInside;
+        private System.Windows.Forms.Button btnCamStopLive;
+        private System.Windows.Forms.Button btnCamStartLive;
+        public System.Windows.Forms.NumericUpDown numV3PulseTime;
+        public System.Windows.Forms.NumericUpDown numV1PulseTime;
+        public System.Windows.Forms.Button btnExpValve3Pulse;
+        public System.Windows.Forms.Button btnExpValve1Pulse;
+        public System.Windows.Forms.NumericUpDown numPulseV3Multi;
+        public System.Windows.Forms.NumericUpDown numPulseV1Multi;
     }
 }
 

@@ -73,7 +73,7 @@ namespace mass_groundstation_v2.helper
                 tb.Text = text;
             }
         }
-        private static void write_log(string log, string log_path = @"C:\Log.txt")
+        public static void write_log(string log, string log_path = @"C:\Log.txt")
         {
             using (StreamWriter sw = new StreamWriter(log_path, true))
             {
