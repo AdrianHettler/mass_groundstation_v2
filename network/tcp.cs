@@ -33,8 +33,8 @@ namespace mass_groundstation_v2.network
         exp_start_inflation = 22,
         exp_uv_on = 23,
         exp_uv_off = 24,
-        exp_cam_start = 25,
-        exp_cam_stop = 26,
+        exp_cam_start_recording = 25,
+        exp_cam_stop_recording = 26,
         exp_valves_manual_on = 27,
         exp_valves_manual_off = 28,
         exp_stop_inflation = 29,
@@ -44,7 +44,6 @@ namespace mass_groundstation_v2.network
         exp_cam_live_stop = 33,
         exp_cam_live_interval = 34,
         exp_valves_pulse = 35
-
     }
 
     public struct tcp_command

@@ -25,7 +25,9 @@ namespace mass_groundstation_v2
         valve_3 = 6,
         valve_4 = 7,
         structures_inside = 8,
-        structures_outside = 9
+        structures_outside = 9,
+        camera_inside = 10,
+        camera_outside = 11
     }
 
     public partial class Form : System.Windows.Forms.Form
@@ -187,12 +189,10 @@ namespace mass_groundstation_v2
                     data = new byte[] { }; //device_id
                     tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_live_outside, data, network.tcp_message_id.ok, "Exp. CAM LIVE OUTSIDE SUCCESS", "Exp. CAM LIVE OUTSIDE FAIL"));
                     break;
-
                 case "btnCamStartLive":
                     data = new byte[] { }; //device_id
                     tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_live_start, data, network.tcp_message_id.ok, "Exp. CAM LIVE DTART INSIDE SUCCESS", "Exp. CAM LIVE START INSIDE FAIL"));
                     break;
-
                 case "btnCamStopLive":
                     data = new byte[] { }; //device_id
                     tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_live_stop, data, network.tcp_message_id.ok, "Exp. CAM LIVE STOP INSIDE SUCCESS", "Exp. CAM LIVE STOP INSIDE FAIL"));
@@ -207,6 +207,22 @@ namespace mass_groundstation_v2
                     tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_valves_pulse, data, network.tcp_message_id.ok, "Exp. PULSE SUCCESS", "Exp. PULSE FAIL"));
                     break;
 
+                case "btnCamStartRecInside":
+                    data = new byte[] { (byte)device_id.camera_inside }; //device_id
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_start_recording, data, network.tcp_message_id.ok, "Exp. CAM START RECORD INSIDE SUCCESS", "Exp. START RECORD STOP INSIDE FAIL"));
+                    break;
+                case "btnCamStopRecInside":
+                    data = new byte[] { (byte)device_id.camera_inside }; //device_id
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_stop_recording, data, network.tcp_message_id.ok, "Exp. CAM STOP RECORD INSIDE SUCCESS", "Exp. CAM STOP RECORD INSIDE FAIL"));
+                    break;
+                case "btnCamStartRecOutside":
+                    data = new byte[] { (byte)device_id.camera_outside }; //device_id
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_start_recording, data, network.tcp_message_id.ok, "Exp. CAM START RECORD INSIDE SUCCESS", "Exp. START RECORD INSIDE FAIL"));
+                    break;
+                case "btnCamStopRecOutside":
+                    data = new byte[] { (byte)device_id.camera_outside }; //device_id
+                    tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_stop_recording, data, network.tcp_message_id.ok, "Exp. CAM STOP RECORD INSIDE SUCCESS", "Exp. CAM STOP RECORD INSIDE FAIL"));
+                    break;
 
                 default:
                     break;

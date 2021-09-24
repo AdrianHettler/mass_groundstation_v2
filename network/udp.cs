@@ -46,12 +46,18 @@ namespace mass_groundstation_v2.network
                             float ambient_temperature_inside = BitConverter.ToSingle(received_bytes, 1);
                             float ambient_temperature_outside = BitConverter.ToSingle(received_bytes, 5);
                             float ambient_pressure = BitConverter.ToSingle(received_bytes, 9);
+                            int cam_remaining_inside = BitConverter.ToInt32(received_bytes, 13);
+                            int cam_remaining_outside = BitConverter.ToInt32(received_bytes, 17);
+
 
                             Helper.change_text_box(Program.main_form.tbAmbientTemperatureInside, ambient_temperature_inside.ToString() + " °C");
                             Helper.change_text_box(Program.main_form.tbAmbientTemperatureOutside, ambient_temperature_outside.ToString() + " °C");
                             Helper.change_text_box(Program.main_form.tbAmbientPressure, ambient_pressure.ToString() + " mbar");
 
-                            if(Program.main_form.lift_off)
+                            Helper.change_text_box(Program.main_form.tbCameraTimeRemainInside, cam_remaining_inside.ToString() + " s");
+                            Helper.change_text_box(Program.main_form.tbCameraTimeRemainOutside, cam_remaining_outside.ToString() + " s");
+
+                            if (Program.main_form.lift_off)
                             {
                                 TimeSpan time = DateTime.Now - Program.main_form.stop_watch_start_time;
 
