@@ -347,5 +347,11 @@ namespace mass_groundstation_v2
                 btnExpLedOnStructure1.Enabled = true;
             }
         }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            byte[] data = BitConverter.GetBytes(Decimal.ToInt32(numCamLiveInterval.Value));
+            tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_live_interval, data, network.tcp_message_id.ok, "Exp. CAM LIVE INTERVAL SUCCESS", "Exp. CAM LIVE INTERVAL FAIL"));
+        }
     }
 }

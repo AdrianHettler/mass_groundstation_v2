@@ -30,11 +30,11 @@ namespace mass_groundstation_v2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabConnection = new System.Windows.Forms.TabPage();
@@ -150,6 +150,8 @@ namespace mass_groundstation_v2
             this.statusStripFlightTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerStopWatch = new System.Windows.Forms.Timer(this.components);
             this.timerConnectionTest = new System.Windows.Forms.Timer(this.components);
+            this.numCamLiveInterval = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTcpPort)).BeginInit();
@@ -182,6 +184,7 @@ namespace mass_groundstation_v2
             this.groupCameraLive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLive)).BeginInit();
             this.statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCamLiveInterval)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -345,14 +348,14 @@ namespace mass_groundstation_v2
             // 
             // chartPressure
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartPressure.ChartAreas.Add(chartArea3);
+            chartArea1.Name = "ChartArea1";
+            this.chartPressure.ChartAreas.Add(chartArea1);
             this.chartPressure.Location = new System.Drawing.Point(6, 63);
             this.chartPressure.Name = "chartPressure";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Name = "pressure";
-            this.chartPressure.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "pressure";
+            this.chartPressure.Series.Add(series1);
             this.chartPressure.Size = new System.Drawing.Size(763, 696);
             this.chartPressure.TabIndex = 2;
             this.chartPressure.Text = "chart2";
@@ -403,19 +406,19 @@ namespace mass_groundstation_v2
             // 
             // chartTemperature
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartTemperature.ChartAreas.Add(chartArea4);
+            chartArea2.Name = "ChartArea1";
+            this.chartTemperature.ChartAreas.Add(chartArea2);
             this.chartTemperature.Location = new System.Drawing.Point(6, 63);
             this.chartTemperature.Name = "chartTemperature";
             this.chartTemperature.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Name = "temperatureInside";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Name = "temperatureOutside";
-            this.chartTemperature.Series.Add(series5);
-            this.chartTemperature.Series.Add(series6);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Name = "temperatureInside";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Name = "temperatureOutside";
+            this.chartTemperature.Series.Add(series2);
+            this.chartTemperature.Series.Add(series3);
             this.chartTemperature.Size = new System.Drawing.Size(763, 696);
             this.chartTemperature.TabIndex = 5;
             this.chartTemperature.Text = "chart1";
@@ -1219,6 +1222,8 @@ namespace mass_groundstation_v2
             // 
             // tabCamera
             // 
+            this.tabCamera.Controls.Add(this.label1);
+            this.tabCamera.Controls.Add(this.numCamLiveInterval);
             this.tabCamera.Controls.Add(this.tbCameraTimeRemainOutside);
             this.tabCamera.Controls.Add(this.tbCameraTimeRemainInside);
             this.tabCamera.Controls.Add(this.btnCamStartRecOutside);
@@ -1241,7 +1246,7 @@ namespace mass_groundstation_v2
             // tbCameraTimeRemainOutside
             // 
             this.tbCameraTimeRemainOutside.Enabled = false;
-            this.tbCameraTimeRemainOutside.Location = new System.Drawing.Point(785, 55);
+            this.tbCameraTimeRemainOutside.Location = new System.Drawing.Point(892, 54);
             this.tbCameraTimeRemainOutside.Name = "tbCameraTimeRemainOutside";
             this.tbCameraTimeRemainOutside.Size = new System.Drawing.Size(100, 20);
             this.tbCameraTimeRemainOutside.TabIndex = 10;
@@ -1249,14 +1254,14 @@ namespace mass_groundstation_v2
             // tbCameraTimeRemainInside
             // 
             this.tbCameraTimeRemainInside.Enabled = false;
-            this.tbCameraTimeRemainInside.Location = new System.Drawing.Point(785, 26);
+            this.tbCameraTimeRemainInside.Location = new System.Drawing.Point(892, 25);
             this.tbCameraTimeRemainInside.Name = "tbCameraTimeRemainInside";
             this.tbCameraTimeRemainInside.Size = new System.Drawing.Size(100, 20);
             this.tbCameraTimeRemainInside.TabIndex = 9;
             // 
             // btnCamStartRecOutside
             // 
-            this.btnCamStartRecOutside.Location = new System.Drawing.Point(481, 53);
+            this.btnCamStartRecOutside.Location = new System.Drawing.Point(588, 52);
             this.btnCamStartRecOutside.Name = "btnCamStartRecOutside";
             this.btnCamStartRecOutside.Size = new System.Drawing.Size(146, 23);
             this.btnCamStartRecOutside.TabIndex = 8;
@@ -1266,7 +1271,7 @@ namespace mass_groundstation_v2
             // 
             // btnCamStopRecOutside
             // 
-            this.btnCamStopRecOutside.Location = new System.Drawing.Point(633, 53);
+            this.btnCamStopRecOutside.Location = new System.Drawing.Point(740, 52);
             this.btnCamStopRecOutside.Name = "btnCamStopRecOutside";
             this.btnCamStopRecOutside.Size = new System.Drawing.Size(146, 23);
             this.btnCamStopRecOutside.TabIndex = 7;
@@ -1276,7 +1281,7 @@ namespace mass_groundstation_v2
             // 
             // btnCamStopRecInside
             // 
-            this.btnCamStopRecInside.Location = new System.Drawing.Point(633, 24);
+            this.btnCamStopRecInside.Location = new System.Drawing.Point(740, 23);
             this.btnCamStopRecInside.Name = "btnCamStopRecInside";
             this.btnCamStopRecInside.Size = new System.Drawing.Size(146, 23);
             this.btnCamStopRecInside.TabIndex = 6;
@@ -1286,7 +1291,7 @@ namespace mass_groundstation_v2
             // 
             // btnCamStartRecInside
             // 
-            this.btnCamStartRecInside.Location = new System.Drawing.Point(481, 24);
+            this.btnCamStartRecInside.Location = new System.Drawing.Point(588, 23);
             this.btnCamStartRecInside.Name = "btnCamStartRecInside";
             this.btnCamStartRecInside.Size = new System.Drawing.Size(146, 23);
             this.btnCamStartRecInside.TabIndex = 5;
@@ -1428,6 +1433,38 @@ namespace mass_groundstation_v2
             this.timerConnectionTest.Interval = 1000;
             this.timerConnectionTest.Tick += new System.EventHandler(this.timerConnectionTest_Tick);
             // 
+            // numCamLiveInterval
+            // 
+            this.numCamLiveInterval.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numCamLiveInterval.Location = new System.Drawing.Point(353, 39);
+            this.numCamLiveInterval.Maximum = new decimal(new int[] {
+            60000,
+            0,
+            0,
+            0});
+            this.numCamLiveInterval.Name = "numCamLiveInterval";
+            this.numCamLiveInterval.Size = new System.Drawing.Size(68, 20);
+            this.numCamLiveInterval.TabIndex = 11;
+            this.numCamLiveInterval.Value = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
+            this.numCamLiveInterval.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(427, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Frame Interval";
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1482,6 +1519,7 @@ namespace mass_groundstation_v2
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLive)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCamLiveInterval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1604,6 +1642,8 @@ namespace mass_groundstation_v2
         private System.Windows.Forms.CheckBox cbExpAutoInflateLock;
         private System.Windows.Forms.CheckBox cbExpManualInflateLock;
         private System.Windows.Forms.CheckBox cbExpUVLock;
+        private System.Windows.Forms.NumericUpDown numCamLiveInterval;
+        private System.Windows.Forms.Label label1;
     }
 }
 
