@@ -63,6 +63,7 @@ namespace mass_groundstation_v2
             this.tabExperiment = new System.Windows.Forms.TabPage();
             this.btnExpLiftOff = new System.Windows.Forms.Button();
             this.groupExpManualInflation = new System.Windows.Forms.GroupBox();
+            this.cbExpManualInflateLock = new System.Windows.Forms.CheckBox();
             this.numPulseV3Multi = new System.Windows.Forms.NumericUpDown();
             this.numPulseV1Multi = new System.Windows.Forms.NumericUpDown();
             this.numV3PulseTime = new System.Windows.Forms.NumericUpDown();
@@ -91,16 +92,19 @@ namespace mass_groundstation_v2
             this.tbExpPneuOutsideStructuresPressure = new System.Windows.Forms.TextBox();
             this.pictureExpPneu = new System.Windows.Forms.PictureBox();
             this.groupExpLed = new System.Windows.Forms.GroupBox();
+            this.cbExpUVLock = new System.Windows.Forms.CheckBox();
             this.btnExpLedOffStructure2 = new System.Windows.Forms.Button();
             this.btnExpLedOffStructure1 = new System.Windows.Forms.Button();
             this.btnExpLedOnStructure2 = new System.Windows.Forms.Button();
             this.btnExpLedOnStructure1 = new System.Windows.Forms.Button();
             this.groupExpAutoInflation = new System.Windows.Forms.GroupBox();
+            this.cbExpAutoInflateLock = new System.Windows.Forms.CheckBox();
             this.btnExpInflationStopOutside = new System.Windows.Forms.Button();
             this.btnExpInflationStopInside = new System.Windows.Forms.Button();
             this.btnExpInflationStartOutside = new System.Windows.Forms.Button();
             this.btnExpInflationStartInside = new System.Windows.Forms.Button();
             this.groupExpHDRM = new System.Windows.Forms.GroupBox();
+            this.cbExpHdrmLock = new System.Windows.Forms.CheckBox();
             this.lblExpHDRMActivationTimeOutside = new System.Windows.Forms.Label();
             this.lblExpHDRMActivationTimeInside = new System.Windows.Forms.Label();
             this.numExpHDRMActivationTimeOutside = new System.Windows.Forms.NumericUpDown();
@@ -124,6 +128,12 @@ namespace mass_groundstation_v2
             this.cbLogsEnableLogFile = new System.Windows.Forms.CheckBox();
             this.rtbLogs = new System.Windows.Forms.RichTextBox();
             this.tabCamera = new System.Windows.Forms.TabPage();
+            this.tbCameraTimeRemainOutside = new System.Windows.Forms.TextBox();
+            this.tbCameraTimeRemainInside = new System.Windows.Forms.TextBox();
+            this.btnCamStartRecOutside = new System.Windows.Forms.Button();
+            this.btnCamStopRecOutside = new System.Windows.Forms.Button();
+            this.btnCamStopRecInside = new System.Windows.Forms.Button();
+            this.btnCamStartRecInside = new System.Windows.Forms.Button();
             this.btnCamStopLive = new System.Windows.Forms.Button();
             this.btnCamStartLive = new System.Windows.Forms.Button();
             this.btnCamOutside = new System.Windows.Forms.Button();
@@ -140,12 +150,6 @@ namespace mass_groundstation_v2
             this.statusStripFlightTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerStopWatch = new System.Windows.Forms.Timer(this.components);
             this.timerConnectionTest = new System.Windows.Forms.Timer(this.components);
-            this.btnCamStartRecInside = new System.Windows.Forms.Button();
-            this.btnCamStopRecInside = new System.Windows.Forms.Button();
-            this.btnCamStopRecOutside = new System.Windows.Forms.Button();
-            this.btnCamStartRecOutside = new System.Windows.Forms.Button();
-            this.tbCameraTimeRemainInside = new System.Windows.Forms.TextBox();
-            this.tbCameraTimeRemainOutside = new System.Windows.Forms.TextBox();
             this.tabControlMain.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTcpPort)).BeginInit();
@@ -481,6 +485,7 @@ namespace mass_groundstation_v2
             // 
             // groupExpManualInflation
             // 
+            this.groupExpManualInflation.Controls.Add(this.cbExpManualInflateLock);
             this.groupExpManualInflation.Controls.Add(this.numPulseV3Multi);
             this.groupExpManualInflation.Controls.Add(this.numPulseV1Multi);
             this.groupExpManualInflation.Controls.Add(this.numV3PulseTime);
@@ -501,6 +506,19 @@ namespace mass_groundstation_v2
             this.groupExpManualInflation.TabIndex = 12;
             this.groupExpManualInflation.TabStop = false;
             this.groupExpManualInflation.Text = "Manual Inflation";
+            // 
+            // cbExpManualInflateLock
+            // 
+            this.cbExpManualInflateLock.AutoSize = true;
+            this.cbExpManualInflateLock.Checked = true;
+            this.cbExpManualInflateLock.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbExpManualInflateLock.Location = new System.Drawing.Point(6, 19);
+            this.cbExpManualInflateLock.Name = "cbExpManualInflateLock";
+            this.cbExpManualInflateLock.Size = new System.Drawing.Size(50, 17);
+            this.cbExpManualInflateLock.TabIndex = 19;
+            this.cbExpManualInflateLock.Text = "Lock";
+            this.cbExpManualInflateLock.UseVisualStyleBackColor = true;
+            this.cbExpManualInflateLock.CheckedChanged += new System.EventHandler(this.cbExpManualInflateLock_CheckedChanged);
             // 
             // numPulseV3Multi
             // 
@@ -562,6 +580,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpValve3Pulse
             // 
+            this.btnExpValve3Pulse.Enabled = false;
             this.btnExpValve3Pulse.Location = new System.Drawing.Point(400, 86);
             this.btnExpValve3Pulse.Name = "btnExpValve3Pulse";
             this.btnExpValve3Pulse.Size = new System.Drawing.Size(156, 23);
@@ -572,6 +591,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpValve1Pulse
             // 
+            this.btnExpValve1Pulse.Enabled = false;
             this.btnExpValve1Pulse.Location = new System.Drawing.Point(400, 28);
             this.btnExpValve1Pulse.Name = "btnExpValve1Pulse";
             this.btnExpValve1Pulse.Size = new System.Drawing.Size(156, 23);
@@ -582,6 +602,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOffValve4
             // 
+            this.btnExpInflationOffValve4.Enabled = false;
             this.btnExpInflationOffValve4.Location = new System.Drawing.Point(245, 115);
             this.btnExpInflationOffValve4.Name = "btnExpInflationOffValve4";
             this.btnExpInflationOffValve4.Size = new System.Drawing.Size(149, 23);
@@ -592,6 +613,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOffValve3
             // 
+            this.btnExpInflationOffValve3.Enabled = false;
             this.btnExpInflationOffValve3.Location = new System.Drawing.Point(245, 86);
             this.btnExpInflationOffValve3.Name = "btnExpInflationOffValve3";
             this.btnExpInflationOffValve3.Size = new System.Drawing.Size(149, 23);
@@ -602,6 +624,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOffValve2
             // 
+            this.btnExpInflationOffValve2.Enabled = false;
             this.btnExpInflationOffValve2.Location = new System.Drawing.Point(245, 57);
             this.btnExpInflationOffValve2.Name = "btnExpInflationOffValve2";
             this.btnExpInflationOffValve2.Size = new System.Drawing.Size(149, 23);
@@ -612,6 +635,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOffValve1
             // 
+            this.btnExpInflationOffValve1.Enabled = false;
             this.btnExpInflationOffValve1.Location = new System.Drawing.Point(245, 28);
             this.btnExpInflationOffValve1.Name = "btnExpInflationOffValve1";
             this.btnExpInflationOffValve1.Size = new System.Drawing.Size(149, 23);
@@ -622,6 +646,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOnValve4
             // 
+            this.btnExpInflationOnValve4.Enabled = false;
             this.btnExpInflationOnValve4.Location = new System.Drawing.Point(83, 115);
             this.btnExpInflationOnValve4.Name = "btnExpInflationOnValve4";
             this.btnExpInflationOnValve4.Size = new System.Drawing.Size(156, 23);
@@ -632,6 +657,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOnValve3
             // 
+            this.btnExpInflationOnValve3.Enabled = false;
             this.btnExpInflationOnValve3.Location = new System.Drawing.Point(83, 86);
             this.btnExpInflationOnValve3.Name = "btnExpInflationOnValve3";
             this.btnExpInflationOnValve3.Size = new System.Drawing.Size(156, 23);
@@ -642,6 +668,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOnValve2
             // 
+            this.btnExpInflationOnValve2.Enabled = false;
             this.btnExpInflationOnValve2.Location = new System.Drawing.Point(83, 57);
             this.btnExpInflationOnValve2.Name = "btnExpInflationOnValve2";
             this.btnExpInflationOnValve2.Size = new System.Drawing.Size(156, 23);
@@ -652,6 +679,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationOnValve1
             // 
+            this.btnExpInflationOnValve1.Enabled = false;
             this.btnExpInflationOnValve1.Location = new System.Drawing.Point(83, 28);
             this.btnExpInflationOnValve1.Name = "btnExpInflationOnValve1";
             this.btnExpInflationOnValve1.Size = new System.Drawing.Size(156, 23);
@@ -793,6 +821,7 @@ namespace mass_groundstation_v2
             // 
             // groupExpLed
             // 
+            this.groupExpLed.Controls.Add(this.cbExpUVLock);
             this.groupExpLed.Controls.Add(this.btnExpLedOffStructure2);
             this.groupExpLed.Controls.Add(this.btnExpLedOffStructure1);
             this.groupExpLed.Controls.Add(this.btnExpLedOnStructure2);
@@ -804,8 +833,22 @@ namespace mass_groundstation_v2
             this.groupExpLed.TabStop = false;
             this.groupExpLed.Text = "UV Leds";
             // 
+            // cbExpUVLock
+            // 
+            this.cbExpUVLock.AutoSize = true;
+            this.cbExpUVLock.Checked = true;
+            this.cbExpUVLock.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbExpUVLock.Location = new System.Drawing.Point(6, 19);
+            this.cbExpUVLock.Name = "cbExpUVLock";
+            this.cbExpUVLock.Size = new System.Drawing.Size(50, 17);
+            this.cbExpUVLock.TabIndex = 20;
+            this.cbExpUVLock.Text = "Lock";
+            this.cbExpUVLock.UseVisualStyleBackColor = true;
+            this.cbExpUVLock.CheckedChanged += new System.EventHandler(this.cbExpUVLock_CheckedChanged);
+            // 
             // btnExpLedOffStructure2
             // 
+            this.btnExpLedOffStructure2.Enabled = false;
             this.btnExpLedOffStructure2.Location = new System.Drawing.Point(403, 60);
             this.btnExpLedOffStructure2.Name = "btnExpLedOffStructure2";
             this.btnExpLedOffStructure2.Size = new System.Drawing.Size(253, 23);
@@ -816,6 +859,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpLedOffStructure1
             // 
+            this.btnExpLedOffStructure1.Enabled = false;
             this.btnExpLedOffStructure1.Location = new System.Drawing.Point(86, 60);
             this.btnExpLedOffStructure1.Name = "btnExpLedOffStructure1";
             this.btnExpLedOffStructure1.Size = new System.Drawing.Size(253, 23);
@@ -826,6 +870,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpLedOnStructure2
             // 
+            this.btnExpLedOnStructure2.Enabled = false;
             this.btnExpLedOnStructure2.Location = new System.Drawing.Point(403, 31);
             this.btnExpLedOnStructure2.Name = "btnExpLedOnStructure2";
             this.btnExpLedOnStructure2.Size = new System.Drawing.Size(253, 23);
@@ -836,6 +881,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpLedOnStructure1
             // 
+            this.btnExpLedOnStructure1.Enabled = false;
             this.btnExpLedOnStructure1.Location = new System.Drawing.Point(86, 31);
             this.btnExpLedOnStructure1.Name = "btnExpLedOnStructure1";
             this.btnExpLedOnStructure1.Size = new System.Drawing.Size(253, 23);
@@ -846,6 +892,7 @@ namespace mass_groundstation_v2
             // 
             // groupExpAutoInflation
             // 
+            this.groupExpAutoInflation.Controls.Add(this.cbExpAutoInflateLock);
             this.groupExpAutoInflation.Controls.Add(this.btnExpInflationStopOutside);
             this.groupExpAutoInflation.Controls.Add(this.btnExpInflationStopInside);
             this.groupExpAutoInflation.Controls.Add(this.btnExpInflationStartOutside);
@@ -857,8 +904,22 @@ namespace mass_groundstation_v2
             this.groupExpAutoInflation.TabStop = false;
             this.groupExpAutoInflation.Text = "Automated Inflation";
             // 
+            // cbExpAutoInflateLock
+            // 
+            this.cbExpAutoInflateLock.AutoSize = true;
+            this.cbExpAutoInflateLock.Checked = true;
+            this.cbExpAutoInflateLock.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbExpAutoInflateLock.Location = new System.Drawing.Point(6, 19);
+            this.cbExpAutoInflateLock.Name = "cbExpAutoInflateLock";
+            this.cbExpAutoInflateLock.Size = new System.Drawing.Size(50, 17);
+            this.cbExpAutoInflateLock.TabIndex = 9;
+            this.cbExpAutoInflateLock.Text = "Lock";
+            this.cbExpAutoInflateLock.UseVisualStyleBackColor = true;
+            this.cbExpAutoInflateLock.CheckedChanged += new System.EventHandler(this.cbExpAutoInflateLock_CheckedChanged);
+            // 
             // btnExpInflationStopOutside
             // 
+            this.btnExpInflationStopOutside.Enabled = false;
             this.btnExpInflationStopOutside.Location = new System.Drawing.Point(403, 60);
             this.btnExpInflationStopOutside.Name = "btnExpInflationStopOutside";
             this.btnExpInflationStopOutside.Size = new System.Drawing.Size(253, 23);
@@ -869,6 +930,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationStopInside
             // 
+            this.btnExpInflationStopInside.Enabled = false;
             this.btnExpInflationStopInside.Location = new System.Drawing.Point(84, 60);
             this.btnExpInflationStopInside.Name = "btnExpInflationStopInside";
             this.btnExpInflationStopInside.Size = new System.Drawing.Size(253, 23);
@@ -879,6 +941,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationStartOutside
             // 
+            this.btnExpInflationStartOutside.Enabled = false;
             this.btnExpInflationStartOutside.Location = new System.Drawing.Point(404, 31);
             this.btnExpInflationStartOutside.Name = "btnExpInflationStartOutside";
             this.btnExpInflationStartOutside.Size = new System.Drawing.Size(253, 23);
@@ -889,6 +952,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpInflationStartInside
             // 
+            this.btnExpInflationStartInside.Enabled = false;
             this.btnExpInflationStartInside.Location = new System.Drawing.Point(84, 31);
             this.btnExpInflationStartInside.Name = "btnExpInflationStartInside";
             this.btnExpInflationStartInside.Size = new System.Drawing.Size(253, 23);
@@ -899,6 +963,7 @@ namespace mass_groundstation_v2
             // 
             // groupExpHDRM
             // 
+            this.groupExpHDRM.Controls.Add(this.cbExpHdrmLock);
             this.groupExpHDRM.Controls.Add(this.lblExpHDRMActivationTimeOutside);
             this.groupExpHDRM.Controls.Add(this.lblExpHDRMActivationTimeInside);
             this.groupExpHDRM.Controls.Add(this.numExpHDRMActivationTimeOutside);
@@ -911,6 +976,19 @@ namespace mass_groundstation_v2
             this.groupExpHDRM.TabIndex = 5;
             this.groupExpHDRM.TabStop = false;
             this.groupExpHDRM.Text = "HDRM";
+            // 
+            // cbExpHdrmLock
+            // 
+            this.cbExpHdrmLock.AutoSize = true;
+            this.cbExpHdrmLock.Checked = true;
+            this.cbExpHdrmLock.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbExpHdrmLock.Location = new System.Drawing.Point(6, 19);
+            this.cbExpHdrmLock.Name = "cbExpHdrmLock";
+            this.cbExpHdrmLock.Size = new System.Drawing.Size(50, 17);
+            this.cbExpHdrmLock.TabIndex = 8;
+            this.cbExpHdrmLock.Text = "Lock";
+            this.cbExpHdrmLock.UseVisualStyleBackColor = true;
+            this.cbExpHdrmLock.CheckedChanged += new System.EventHandler(this.cbExpHdrmLock_CheckedChanged);
             // 
             // lblExpHDRMActivationTimeOutside
             // 
@@ -956,6 +1034,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpHDRMOutside
             // 
+            this.btnExpHDRMOutside.Enabled = false;
             this.btnExpHDRMOutside.Location = new System.Drawing.Point(403, 29);
             this.btnExpHDRMOutside.Name = "btnExpHDRMOutside";
             this.btnExpHDRMOutside.Size = new System.Drawing.Size(254, 23);
@@ -966,6 +1045,7 @@ namespace mass_groundstation_v2
             // 
             // btnExpHDRMInside
             // 
+            this.btnExpHDRMInside.Enabled = false;
             this.btnExpHDRMInside.Location = new System.Drawing.Point(86, 29);
             this.btnExpHDRMInside.Name = "btnExpHDRMInside";
             this.btnExpHDRMInside.Size = new System.Drawing.Size(253, 23);
@@ -1158,6 +1238,62 @@ namespace mass_groundstation_v2
             this.tabCamera.Text = "Camera";
             this.tabCamera.UseVisualStyleBackColor = true;
             // 
+            // tbCameraTimeRemainOutside
+            // 
+            this.tbCameraTimeRemainOutside.Enabled = false;
+            this.tbCameraTimeRemainOutside.Location = new System.Drawing.Point(785, 55);
+            this.tbCameraTimeRemainOutside.Name = "tbCameraTimeRemainOutside";
+            this.tbCameraTimeRemainOutside.Size = new System.Drawing.Size(100, 20);
+            this.tbCameraTimeRemainOutside.TabIndex = 10;
+            // 
+            // tbCameraTimeRemainInside
+            // 
+            this.tbCameraTimeRemainInside.Enabled = false;
+            this.tbCameraTimeRemainInside.Location = new System.Drawing.Point(785, 26);
+            this.tbCameraTimeRemainInside.Name = "tbCameraTimeRemainInside";
+            this.tbCameraTimeRemainInside.Size = new System.Drawing.Size(100, 20);
+            this.tbCameraTimeRemainInside.TabIndex = 9;
+            // 
+            // btnCamStartRecOutside
+            // 
+            this.btnCamStartRecOutside.Location = new System.Drawing.Point(481, 53);
+            this.btnCamStartRecOutside.Name = "btnCamStartRecOutside";
+            this.btnCamStartRecOutside.Size = new System.Drawing.Size(146, 23);
+            this.btnCamStartRecOutside.TabIndex = 8;
+            this.btnCamStartRecOutside.Text = "Start Recording Outside";
+            this.btnCamStartRecOutside.UseVisualStyleBackColor = true;
+            this.btnCamStartRecOutside.Click += new System.EventHandler(this.button_click_handler_commands);
+            // 
+            // btnCamStopRecOutside
+            // 
+            this.btnCamStopRecOutside.Location = new System.Drawing.Point(633, 53);
+            this.btnCamStopRecOutside.Name = "btnCamStopRecOutside";
+            this.btnCamStopRecOutside.Size = new System.Drawing.Size(146, 23);
+            this.btnCamStopRecOutside.TabIndex = 7;
+            this.btnCamStopRecOutside.Text = "Stop Recording Outside";
+            this.btnCamStopRecOutside.UseVisualStyleBackColor = true;
+            this.btnCamStopRecOutside.Click += new System.EventHandler(this.button_click_handler_commands);
+            // 
+            // btnCamStopRecInside
+            // 
+            this.btnCamStopRecInside.Location = new System.Drawing.Point(633, 24);
+            this.btnCamStopRecInside.Name = "btnCamStopRecInside";
+            this.btnCamStopRecInside.Size = new System.Drawing.Size(146, 23);
+            this.btnCamStopRecInside.TabIndex = 6;
+            this.btnCamStopRecInside.Text = "Stop Recording Inside";
+            this.btnCamStopRecInside.UseVisualStyleBackColor = true;
+            this.btnCamStopRecInside.Click += new System.EventHandler(this.button_click_handler_commands);
+            // 
+            // btnCamStartRecInside
+            // 
+            this.btnCamStartRecInside.Location = new System.Drawing.Point(481, 24);
+            this.btnCamStartRecInside.Name = "btnCamStartRecInside";
+            this.btnCamStartRecInside.Size = new System.Drawing.Size(146, 23);
+            this.btnCamStartRecInside.TabIndex = 5;
+            this.btnCamStartRecInside.Text = "Start Recording Inside";
+            this.btnCamStartRecInside.UseVisualStyleBackColor = true;
+            this.btnCamStartRecInside.Click += new System.EventHandler(this.button_click_handler_commands);
+            // 
             // btnCamStopLive
             // 
             this.btnCamStopLive.Location = new System.Drawing.Point(19, 53);
@@ -1292,62 +1428,6 @@ namespace mass_groundstation_v2
             this.timerConnectionTest.Interval = 1000;
             this.timerConnectionTest.Tick += new System.EventHandler(this.timerConnectionTest_Tick);
             // 
-            // btnCamStartRecInside
-            // 
-            this.btnCamStartRecInside.Location = new System.Drawing.Point(481, 24);
-            this.btnCamStartRecInside.Name = "btnCamStartRecInside";
-            this.btnCamStartRecInside.Size = new System.Drawing.Size(146, 23);
-            this.btnCamStartRecInside.TabIndex = 5;
-            this.btnCamStartRecInside.Text = "Start Recording Inside";
-            this.btnCamStartRecInside.UseVisualStyleBackColor = true;
-            this.btnCamStartRecInside.Click += new System.EventHandler(this.button_click_handler_commands);
-            // 
-            // btnCamStopRecInside
-            // 
-            this.btnCamStopRecInside.Location = new System.Drawing.Point(633, 24);
-            this.btnCamStopRecInside.Name = "btnCamStopRecInside";
-            this.btnCamStopRecInside.Size = new System.Drawing.Size(146, 23);
-            this.btnCamStopRecInside.TabIndex = 6;
-            this.btnCamStopRecInside.Text = "Stop Recording Inside";
-            this.btnCamStopRecInside.UseVisualStyleBackColor = true;
-            this.btnCamStopRecInside.Click += new System.EventHandler(this.button_click_handler_commands);
-            // 
-            // btnCamStopRecOutside
-            // 
-            this.btnCamStopRecOutside.Location = new System.Drawing.Point(633, 53);
-            this.btnCamStopRecOutside.Name = "btnCamStopRecOutside";
-            this.btnCamStopRecOutside.Size = new System.Drawing.Size(146, 23);
-            this.btnCamStopRecOutside.TabIndex = 7;
-            this.btnCamStopRecOutside.Text = "Stop Recording Outside";
-            this.btnCamStopRecOutside.UseVisualStyleBackColor = true;
-            this.btnCamStopRecOutside.Click += new System.EventHandler(this.button_click_handler_commands);
-            // 
-            // btnCamStartRecOutside
-            // 
-            this.btnCamStartRecOutside.Location = new System.Drawing.Point(481, 53);
-            this.btnCamStartRecOutside.Name = "btnCamStartRecOutside";
-            this.btnCamStartRecOutside.Size = new System.Drawing.Size(146, 23);
-            this.btnCamStartRecOutside.TabIndex = 8;
-            this.btnCamStartRecOutside.Text = "Start Recording Outside";
-            this.btnCamStartRecOutside.UseVisualStyleBackColor = true;
-            this.btnCamStartRecOutside.Click += new System.EventHandler(this.button_click_handler_commands);
-            // 
-            // tbCameraTimeRemainInside
-            // 
-            this.tbCameraTimeRemainInside.Enabled = false;
-            this.tbCameraTimeRemainInside.Location = new System.Drawing.Point(785, 26);
-            this.tbCameraTimeRemainInside.Name = "tbCameraTimeRemainInside";
-            this.tbCameraTimeRemainInside.Size = new System.Drawing.Size(100, 20);
-            this.tbCameraTimeRemainInside.TabIndex = 9;
-            // 
-            // tbCameraTimeRemainOutside
-            // 
-            this.tbCameraTimeRemainOutside.Enabled = false;
-            this.tbCameraTimeRemainOutside.Location = new System.Drawing.Point(785, 55);
-            this.tbCameraTimeRemainOutside.Name = "tbCameraTimeRemainOutside";
-            this.tbCameraTimeRemainOutside.Size = new System.Drawing.Size(100, 20);
-            this.tbCameraTimeRemainOutside.TabIndex = 10;
-            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1374,6 +1454,7 @@ namespace mass_groundstation_v2
             ((System.ComponentModel.ISupportInitialize)(this.chartTemperature)).EndInit();
             this.tabExperiment.ResumeLayout(false);
             this.groupExpManualInflation.ResumeLayout(false);
+            this.groupExpManualInflation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPulseV3Multi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPulseV1Multi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numV3PulseTime)).EndInit();
@@ -1383,7 +1464,9 @@ namespace mass_groundstation_v2
             this.groupExpPneu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureExpPneu)).EndInit();
             this.groupExpLed.ResumeLayout(false);
+            this.groupExpLed.PerformLayout();
             this.groupExpAutoInflation.ResumeLayout(false);
+            this.groupExpAutoInflation.PerformLayout();
             this.groupExpHDRM.ResumeLayout(false);
             this.groupExpHDRM.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numExpHDRMActivationTimeOutside)).EndInit();
@@ -1517,6 +1600,10 @@ namespace mass_groundstation_v2
         public System.Windows.Forms.Button btnCamStartRecInside;
         public System.Windows.Forms.TextBox tbCameraTimeRemainOutside;
         public System.Windows.Forms.TextBox tbCameraTimeRemainInside;
+        private System.Windows.Forms.CheckBox cbExpHdrmLock;
+        private System.Windows.Forms.CheckBox cbExpAutoInflateLock;
+        private System.Windows.Forms.CheckBox cbExpManualInflateLock;
+        private System.Windows.Forms.CheckBox cbExpUVLock;
     }
 }
 

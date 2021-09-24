@@ -266,6 +266,86 @@ namespace mass_groundstation_v2
             chartPressure.ChartAreas[0].AxisX.Maximum = 0.417 * trackbarScalingAmbPressure.Value / 100f;
         }
 
-       
+        private void cbExpHdrmLock_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbExpHdrmLock.Checked)
+            {
+                btnExpHDRMInside.Enabled = false;
+                btnExpHDRMOutside.Enabled = false;
+            }
+            else
+            {
+                btnExpHDRMInside.Enabled = true;
+                btnExpHDRMOutside.Enabled = true;
+            }
+        }
+
+
+
+        private void cbExpManualInflateLock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbExpManualInflateLock.Checked)
+            {
+                btnExpInflationOffValve1.Enabled = false;
+                btnExpInflationOffValve2.Enabled = false;
+                btnExpInflationOffValve3.Enabled = false;
+                btnExpInflationOffValve4.Enabled = false;
+                btnExpInflationOnValve1.Enabled = false;
+                btnExpInflationOnValve2.Enabled = false;
+                btnExpInflationOnValve3.Enabled = false;
+                btnExpInflationOnValve4.Enabled = false;
+                btnExpValve1Pulse.Enabled = false;
+                btnExpValve3Pulse.Enabled = false;
+            }
+            else
+            {
+                btnExpInflationOffValve1.Enabled = true;
+                btnExpInflationOffValve2.Enabled = true;
+                btnExpInflationOffValve3.Enabled = true;
+                btnExpInflationOffValve4.Enabled = true;
+                btnExpInflationOnValve1.Enabled = true;
+                btnExpInflationOnValve2.Enabled = true;
+                btnExpInflationOnValve3.Enabled = true;
+                btnExpInflationOnValve4.Enabled = true;
+                btnExpValve1Pulse.Enabled = true;
+                btnExpValve3Pulse.Enabled = true;
+            }
+        }
+
+        private void cbExpAutoInflateLock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbExpAutoInflateLock.Checked)
+            {
+                btnExpInflationStartInside.Enabled = false;
+                btnExpInflationStopInside.Enabled = false;
+                btnExpInflationStartOutside.Enabled = false;
+                btnExpInflationStopOutside.Enabled = false;
+            }
+            else
+            {
+                btnExpInflationStartInside.Enabled = true;
+                btnExpInflationStopInside.Enabled = true;
+                btnExpInflationStartOutside.Enabled = true;
+                btnExpInflationStopOutside.Enabled = true;
+            }
+        }
+
+        private void cbExpUVLock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbExpUVLock.Checked)
+            {
+                btnExpLedOffStructure2.Enabled = false;
+                btnExpLedOffStructure1.Enabled = false;
+                btnExpLedOnStructure2.Enabled = false;
+                btnExpLedOnStructure1.Enabled = false;
+            }
+            else
+            {
+                btnExpLedOffStructure2.Enabled = true;
+                btnExpLedOffStructure1.Enabled = true;
+                btnExpLedOnStructure2.Enabled = true;
+                btnExpLedOnStructure1.Enabled = true;
+            }
+        }
     }
 }
