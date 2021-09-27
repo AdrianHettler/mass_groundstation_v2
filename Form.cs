@@ -34,7 +34,7 @@ namespace mass_groundstation_v2
     {
         private network.udp udp_client;
         private network.tcp tcp_client;
-        public helper.direct_bitmap frame_bmp = new helper.direct_bitmap(800, 612);
+        public helper.direct_bitmap frame_bmp = new helper.direct_bitmap(800, 256*2); //612
         public DateTime stop_watch_start_time;
         public bool lift_off = false;
 
@@ -350,7 +350,12 @@ namespace mass_groundstation_v2
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            byte[] data = BitConverter.GetBytes(Decimal.ToInt32(numCamLiveInterval.Value));
+           
+        }
+
+        private void btnCamChangeFrameInterval_Click(object sender, EventArgs e)
+        {
+            byte[] data = { Decimal.ToByte(numCamLiveInterval.Value / 100) };
             tcp_client.tcp_command_list.Add(new network.tcp_command(network.tcp_message_id.exp_cam_live_interval, data, network.tcp_message_id.ok, "Exp. CAM LIVE INTERVAL SUCCESS", "Exp. CAM LIVE INTERVAL FAIL"));
         }
     }

@@ -40,10 +40,20 @@ namespace mass_groundstation_v2.helper
 
         public void SetLine(int y, byte[] line)
         {
+            //256
+
+            if(y >= 210)
+            {
+                y = y - 210;
+            }
+            else
+            {
+                y = 256 - 210 + y;
+            }
+
 
             if(line[1] == 1)
-            {
-               
+            {            
 
                 for (int i = 0; i < Width; i++)
                 {

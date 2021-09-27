@@ -106,7 +106,6 @@ namespace mass_groundstation_v2.network
                             Helper.write_log(log_power, Path.Combine(Program.application_path + "\\" + Program.application_start_time, "power_log_file_" + Program.application_start_time + ".txt"));
 
 
-
                             break;
 
                         case udp_message_id.picture:
@@ -119,7 +118,7 @@ namespace mass_groundstation_v2.network
 
 
 
-                            if (BitConverter.ToUInt16(received_bytes, 1) == 305)
+                            if (BitConverter.ToUInt16(received_bytes, 1) == 255)
                             {
                                 Program.main_form.pictureBoxLive.Invoke((MethodInvoker)delegate
                                 {

@@ -128,6 +128,8 @@ namespace mass_groundstation_v2
             this.cbLogsEnableLogFile = new System.Windows.Forms.CheckBox();
             this.rtbLogs = new System.Windows.Forms.RichTextBox();
             this.tabCamera = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numCamLiveInterval = new System.Windows.Forms.NumericUpDown();
             this.tbCameraTimeRemainOutside = new System.Windows.Forms.TextBox();
             this.tbCameraTimeRemainInside = new System.Windows.Forms.TextBox();
             this.btnCamStartRecOutside = new System.Windows.Forms.Button();
@@ -150,8 +152,7 @@ namespace mass_groundstation_v2
             this.statusStripFlightTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerStopWatch = new System.Windows.Forms.Timer(this.components);
             this.timerConnectionTest = new System.Windows.Forms.Timer(this.components);
-            this.numCamLiveInterval = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnCamChangeFrameInterval = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTcpPort)).BeginInit();
@@ -181,10 +182,10 @@ namespace mass_groundstation_v2
             ((System.ComponentModel.ISupportInitialize)(this.picExpPower)).BeginInit();
             this.tabLogs.SuspendLayout();
             this.tabCamera.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCamLiveInterval)).BeginInit();
             this.groupCameraLive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLive)).BeginInit();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numCamLiveInterval)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -194,10 +195,11 @@ namespace mass_groundstation_v2
             this.tabControlMain.Controls.Add(this.tabExperiment);
             this.tabControlMain.Controls.Add(this.tabLogs);
             this.tabControlMain.Controls.Add(this.tabCamera);
-            this.tabControlMain.Location = new System.Drawing.Point(3, 3);
+            this.tabControlMain.Location = new System.Drawing.Point(6, 6);
+            this.tabControlMain.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(1579, 856);
+            this.tabControlMain.Size = new System.Drawing.Size(3158, 1646);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabConnection
@@ -211,19 +213,21 @@ namespace mass_groundstation_v2
             this.tabConnection.Controls.Add(this.tbConnectionGsIP);
             this.tabConnection.Controls.Add(this.lblConnectionExpIP);
             this.tabConnection.Controls.Add(this.tbConnectionExpIP);
-            this.tabConnection.Location = new System.Drawing.Point(4, 22);
+            this.tabConnection.Location = new System.Drawing.Point(8, 39);
+            this.tabConnection.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tabConnection.Name = "tabConnection";
-            this.tabConnection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConnection.Size = new System.Drawing.Size(1571, 830);
+            this.tabConnection.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabConnection.Size = new System.Drawing.Size(3142, 1599);
             this.tabConnection.TabIndex = 0;
             this.tabConnection.Text = "Connection";
             this.tabConnection.UseVisualStyleBackColor = true;
             // 
             // btnConnectionClearTCPList
             // 
-            this.btnConnectionClearTCPList.Location = new System.Drawing.Point(339, 33);
+            this.btnConnectionClearTCPList.Location = new System.Drawing.Point(678, 63);
+            this.btnConnectionClearTCPList.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnConnectionClearTCPList.Name = "btnConnectionClearTCPList";
-            this.btnConnectionClearTCPList.Size = new System.Drawing.Size(219, 23);
+            this.btnConnectionClearTCPList.Size = new System.Drawing.Size(438, 44);
             this.btnConnectionClearTCPList.TabIndex = 8;
             this.btnConnectionClearTCPList.Text = "Clear TCP Commandlist";
             this.btnConnectionClearTCPList.UseVisualStyleBackColor = true;
@@ -233,9 +237,10 @@ namespace mass_groundstation_v2
             // 
             this.lblTcpPort.AutoSize = true;
             this.lblTcpPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTcpPort.Location = new System.Drawing.Point(45, 113);
+            this.lblTcpPort.Location = new System.Drawing.Point(90, 217);
+            this.lblTcpPort.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblTcpPort.Name = "lblTcpPort";
-            this.lblTcpPort.Size = new System.Drawing.Size(62, 16);
+            this.lblTcpPort.Size = new System.Drawing.Size(119, 30);
             this.lblTcpPort.TabIndex = 7;
             this.lblTcpPort.Text = "TCP Port";
             // 
@@ -243,9 +248,10 @@ namespace mass_groundstation_v2
             // 
             this.lblUdpPort.AutoSize = true;
             this.lblUdpPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUdpPort.Location = new System.Drawing.Point(43, 87);
+            this.lblUdpPort.Location = new System.Drawing.Point(86, 167);
+            this.lblUdpPort.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblUdpPort.Name = "lblUdpPort";
-            this.lblUdpPort.Size = new System.Drawing.Size(64, 16);
+            this.lblUdpPort.Size = new System.Drawing.Size(122, 30);
             this.lblUdpPort.TabIndex = 6;
             this.lblUdpPort.Text = "UDP Port";
             // 
@@ -253,17 +259,19 @@ namespace mass_groundstation_v2
             // 
             this.lblGsIP.AutoSize = true;
             this.lblGsIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGsIP.Location = new System.Drawing.Point(43, 62);
+            this.lblGsIP.Location = new System.Drawing.Point(86, 119);
+            this.lblGsIP.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblGsIP.Name = "lblGsIP";
-            this.lblGsIP.Size = new System.Drawing.Size(106, 16);
+            this.lblGsIP.Size = new System.Drawing.Size(203, 30);
             this.lblGsIP.TabIndex = 5;
             this.lblGsIP.Text = "Groundstation IP";
             // 
             // numTcpPort
             // 
-            this.numTcpPort.Location = new System.Drawing.Point(158, 113);
+            this.numTcpPort.Location = new System.Drawing.Point(316, 217);
+            this.numTcpPort.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.numTcpPort.Name = "numTcpPort";
-            this.numTcpPort.Size = new System.Drawing.Size(100, 20);
+            this.numTcpPort.Size = new System.Drawing.Size(200, 31);
             this.numTcpPort.TabIndex = 4;
             this.numTcpPort.Value = new decimal(new int[] {
             10,
@@ -273,9 +281,10 @@ namespace mass_groundstation_v2
             // 
             // numUdpPort
             // 
-            this.numUdpPort.Location = new System.Drawing.Point(158, 87);
+            this.numUdpPort.Location = new System.Drawing.Point(316, 167);
+            this.numUdpPort.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.numUdpPort.Name = "numUdpPort";
-            this.numUdpPort.Size = new System.Drawing.Size(100, 20);
+            this.numUdpPort.Size = new System.Drawing.Size(200, 31);
             this.numUdpPort.TabIndex = 3;
             this.numUdpPort.Value = new decimal(new int[] {
             8,
@@ -285,38 +294,42 @@ namespace mass_groundstation_v2
             // 
             // tbConnectionGsIP
             // 
-            this.tbConnectionGsIP.Location = new System.Drawing.Point(158, 61);
+            this.tbConnectionGsIP.Location = new System.Drawing.Point(316, 117);
+            this.tbConnectionGsIP.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbConnectionGsIP.Name = "tbConnectionGsIP";
-            this.tbConnectionGsIP.Size = new System.Drawing.Size(100, 20);
+            this.tbConnectionGsIP.Size = new System.Drawing.Size(196, 31);
             this.tbConnectionGsIP.TabIndex = 2;
-            this.tbConnectionGsIP.Text = "192.168.2.109";
+            this.tbConnectionGsIP.Text = "172.16.18.110";
             // 
             // lblConnectionExpIP
             // 
             this.lblConnectionExpIP.AutoSize = true;
             this.lblConnectionExpIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConnectionExpIP.Location = new System.Drawing.Point(43, 36);
+            this.lblConnectionExpIP.Location = new System.Drawing.Point(86, 69);
+            this.lblConnectionExpIP.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblConnectionExpIP.Name = "lblConnectionExpIP";
-            this.lblConnectionExpIP.Size = new System.Drawing.Size(90, 16);
+            this.lblConnectionExpIP.Size = new System.Drawing.Size(172, 30);
             this.lblConnectionExpIP.TabIndex = 1;
             this.lblConnectionExpIP.Text = "Experiment IP";
             // 
             // tbConnectionExpIP
             // 
-            this.tbConnectionExpIP.Location = new System.Drawing.Point(158, 35);
+            this.tbConnectionExpIP.Location = new System.Drawing.Point(316, 67);
+            this.tbConnectionExpIP.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbConnectionExpIP.Name = "tbConnectionExpIP";
-            this.tbConnectionExpIP.Size = new System.Drawing.Size(100, 20);
+            this.tbConnectionExpIP.Size = new System.Drawing.Size(196, 31);
             this.tbConnectionExpIP.TabIndex = 0;
-            this.tbConnectionExpIP.Text = "192.168.2.112";
+            this.tbConnectionExpIP.Text = "172.16.18.111";
             // 
             // tabAmbient
             // 
             this.tabAmbient.Controls.Add(this.groupAmbientPressure);
             this.tabAmbient.Controls.Add(this.groupAmbientTemperature);
-            this.tabAmbient.Location = new System.Drawing.Point(4, 22);
+            this.tabAmbient.Location = new System.Drawing.Point(8, 39);
+            this.tabAmbient.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tabAmbient.Name = "tabAmbient";
-            this.tabAmbient.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAmbient.Size = new System.Drawing.Size(1571, 830);
+            this.tabAmbient.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabAmbient.Size = new System.Drawing.Size(3142, 1599);
             this.tabAmbient.TabIndex = 1;
             this.tabAmbient.Text = "Ambient Conditions";
             this.tabAmbient.UseVisualStyleBackColor = true;
@@ -327,9 +340,11 @@ namespace mass_groundstation_v2
             this.groupAmbientPressure.Controls.Add(this.chartPressure);
             this.groupAmbientPressure.Controls.Add(this.tbAmbientPressure);
             this.groupAmbientPressure.Controls.Add(this.lblAmbientPressure);
-            this.groupAmbientPressure.Location = new System.Drawing.Point(790, 6);
+            this.groupAmbientPressure.Location = new System.Drawing.Point(1580, 12);
+            this.groupAmbientPressure.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupAmbientPressure.Name = "groupAmbientPressure";
-            this.groupAmbientPressure.Size = new System.Drawing.Size(775, 818);
+            this.groupAmbientPressure.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupAmbientPressure.Size = new System.Drawing.Size(1550, 1573);
             this.groupAmbientPressure.TabIndex = 1;
             this.groupAmbientPressure.TabStop = false;
             this.groupAmbientPressure.Text = "Pressure";
@@ -337,11 +352,12 @@ namespace mass_groundstation_v2
             // trackbarScalingAmbPressure
             // 
             this.trackbarScalingAmbPressure.AccessibleName = "";
-            this.trackbarScalingAmbPressure.Location = new System.Drawing.Point(279, 746);
+            this.trackbarScalingAmbPressure.Location = new System.Drawing.Point(558, 1435);
+            this.trackbarScalingAmbPressure.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.trackbarScalingAmbPressure.Maximum = 100;
             this.trackbarScalingAmbPressure.Minimum = 1;
             this.trackbarScalingAmbPressure.Name = "trackbarScalingAmbPressure";
-            this.trackbarScalingAmbPressure.Size = new System.Drawing.Size(250, 45);
+            this.trackbarScalingAmbPressure.Size = new System.Drawing.Size(500, 90);
             this.trackbarScalingAmbPressure.TabIndex = 7;
             this.trackbarScalingAmbPressure.Value = 30;
             this.trackbarScalingAmbPressure.Scroll += new System.EventHandler(this.trackbarScalingAmbPressure_Scroll);
@@ -350,30 +366,33 @@ namespace mass_groundstation_v2
             // 
             chartArea1.Name = "ChartArea1";
             this.chartPressure.ChartAreas.Add(chartArea1);
-            this.chartPressure.Location = new System.Drawing.Point(6, 63);
+            this.chartPressure.Location = new System.Drawing.Point(12, 121);
+            this.chartPressure.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.chartPressure.Name = "chartPressure";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Name = "pressure";
             this.chartPressure.Series.Add(series1);
-            this.chartPressure.Size = new System.Drawing.Size(763, 696);
+            this.chartPressure.Size = new System.Drawing.Size(1526, 1338);
             this.chartPressure.TabIndex = 2;
             this.chartPressure.Text = "chart2";
             // 
             // tbAmbientPressure
             // 
-            this.tbAmbientPressure.Location = new System.Drawing.Point(175, 37);
+            this.tbAmbientPressure.Location = new System.Drawing.Point(350, 71);
+            this.tbAmbientPressure.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbAmbientPressure.Name = "tbAmbientPressure";
             this.tbAmbientPressure.ReadOnly = true;
-            this.tbAmbientPressure.Size = new System.Drawing.Size(100, 20);
+            this.tbAmbientPressure.Size = new System.Drawing.Size(196, 31);
             this.tbAmbientPressure.TabIndex = 1;
             // 
             // lblAmbientPressure
             // 
             this.lblAmbientPressure.AutoSize = true;
-            this.lblAmbientPressure.Location = new System.Drawing.Point(84, 40);
+            this.lblAmbientPressure.Location = new System.Drawing.Point(168, 77);
+            this.lblAmbientPressure.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAmbientPressure.Name = "lblAmbientPressure";
-            this.lblAmbientPressure.Size = new System.Drawing.Size(85, 13);
+            this.lblAmbientPressure.Size = new System.Drawing.Size(175, 25);
             this.lblAmbientPressure.TabIndex = 0;
             this.lblAmbientPressure.Text = "Current Pressure";
             // 
@@ -385,9 +404,11 @@ namespace mass_groundstation_v2
             this.groupAmbientTemperature.Controls.Add(this.tbAmbientTemperatureOutside);
             this.groupAmbientTemperature.Controls.Add(this.lblAmbientTemperatureInside);
             this.groupAmbientTemperature.Controls.Add(this.tbAmbientTemperatureInside);
-            this.groupAmbientTemperature.Location = new System.Drawing.Point(6, 6);
+            this.groupAmbientTemperature.Location = new System.Drawing.Point(12, 12);
+            this.groupAmbientTemperature.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupAmbientTemperature.Name = "groupAmbientTemperature";
-            this.groupAmbientTemperature.Size = new System.Drawing.Size(775, 818);
+            this.groupAmbientTemperature.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupAmbientTemperature.Size = new System.Drawing.Size(1550, 1573);
             this.groupAmbientTemperature.TabIndex = 0;
             this.groupAmbientTemperature.TabStop = false;
             this.groupAmbientTemperature.Text = "Temperature";
@@ -395,11 +416,12 @@ namespace mass_groundstation_v2
             // trackbarScalingAmbTemperature
             // 
             this.trackbarScalingAmbTemperature.AccessibleName = "";
-            this.trackbarScalingAmbTemperature.Location = new System.Drawing.Point(279, 746);
+            this.trackbarScalingAmbTemperature.Location = new System.Drawing.Point(558, 1435);
+            this.trackbarScalingAmbTemperature.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.trackbarScalingAmbTemperature.Maximum = 100;
             this.trackbarScalingAmbTemperature.Minimum = 1;
             this.trackbarScalingAmbTemperature.Name = "trackbarScalingAmbTemperature";
-            this.trackbarScalingAmbTemperature.Size = new System.Drawing.Size(250, 45);
+            this.trackbarScalingAmbTemperature.Size = new System.Drawing.Size(500, 90);
             this.trackbarScalingAmbTemperature.TabIndex = 6;
             this.trackbarScalingAmbTemperature.Value = 30;
             this.trackbarScalingAmbTemperature.Scroll += new System.EventHandler(this.trackbarScalingAmbTemperature_Scroll);
@@ -408,7 +430,8 @@ namespace mass_groundstation_v2
             // 
             chartArea2.Name = "ChartArea1";
             this.chartTemperature.ChartAreas.Add(chartArea2);
-            this.chartTemperature.Location = new System.Drawing.Point(6, 63);
+            this.chartTemperature.Location = new System.Drawing.Point(12, 121);
+            this.chartTemperature.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.chartTemperature.Name = "chartTemperature";
             this.chartTemperature.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             series2.ChartArea = "ChartArea1";
@@ -419,42 +442,46 @@ namespace mass_groundstation_v2
             series3.Name = "temperatureOutside";
             this.chartTemperature.Series.Add(series2);
             this.chartTemperature.Series.Add(series3);
-            this.chartTemperature.Size = new System.Drawing.Size(763, 696);
+            this.chartTemperature.Size = new System.Drawing.Size(1526, 1338);
             this.chartTemperature.TabIndex = 5;
             this.chartTemperature.Text = "chart1";
             // 
             // lblAmbientTemperatureOutside
             // 
             this.lblAmbientTemperatureOutside.AutoSize = true;
-            this.lblAmbientTemperatureOutside.Location = new System.Drawing.Point(386, 40);
+            this.lblAmbientTemperatureOutside.Location = new System.Drawing.Point(772, 77);
+            this.lblAmbientTemperatureOutside.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAmbientTemperatureOutside.Name = "lblAmbientTemperatureOutside";
-            this.lblAmbientTemperatureOutside.Size = new System.Drawing.Size(143, 13);
+            this.lblAmbientTemperatureOutside.Size = new System.Drawing.Size(291, 25);
             this.lblAmbientTemperatureOutside.TabIndex = 4;
             this.lblAmbientTemperatureOutside.Text = "Current Temperature Outside";
             // 
             // tbAmbientTemperatureOutside
             // 
-            this.tbAmbientTemperatureOutside.Location = new System.Drawing.Point(535, 37);
+            this.tbAmbientTemperatureOutside.Location = new System.Drawing.Point(1070, 71);
+            this.tbAmbientTemperatureOutside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbAmbientTemperatureOutside.Name = "tbAmbientTemperatureOutside";
             this.tbAmbientTemperatureOutside.ReadOnly = true;
-            this.tbAmbientTemperatureOutside.Size = new System.Drawing.Size(100, 20);
+            this.tbAmbientTemperatureOutside.Size = new System.Drawing.Size(196, 31);
             this.tbAmbientTemperatureOutside.TabIndex = 3;
             // 
             // lblAmbientTemperatureInside
             // 
             this.lblAmbientTemperatureInside.AutoSize = true;
-            this.lblAmbientTemperatureInside.Location = new System.Drawing.Point(94, 40);
+            this.lblAmbientTemperatureInside.Location = new System.Drawing.Point(188, 77);
+            this.lblAmbientTemperatureInside.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAmbientTemperatureInside.Name = "lblAmbientTemperatureInside";
-            this.lblAmbientTemperatureInside.Size = new System.Drawing.Size(135, 13);
+            this.lblAmbientTemperatureInside.Size = new System.Drawing.Size(274, 25);
             this.lblAmbientTemperatureInside.TabIndex = 2;
             this.lblAmbientTemperatureInside.Text = "Current Temperature Inside";
             // 
             // tbAmbientTemperatureInside
             // 
-            this.tbAmbientTemperatureInside.Location = new System.Drawing.Point(235, 37);
+            this.tbAmbientTemperatureInside.Location = new System.Drawing.Point(470, 71);
+            this.tbAmbientTemperatureInside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbAmbientTemperatureInside.Name = "tbAmbientTemperatureInside";
             this.tbAmbientTemperatureInside.ReadOnly = true;
-            this.tbAmbientTemperatureInside.Size = new System.Drawing.Size(100, 20);
+            this.tbAmbientTemperatureInside.Size = new System.Drawing.Size(196, 31);
             this.tbAmbientTemperatureInside.TabIndex = 1;
             // 
             // tabExperiment
@@ -467,10 +494,11 @@ namespace mass_groundstation_v2
             this.tabExperiment.Controls.Add(this.groupExpAutoInflation);
             this.tabExperiment.Controls.Add(this.groupExpHDRM);
             this.tabExperiment.Controls.Add(this.groupExpPower);
-            this.tabExperiment.Location = new System.Drawing.Point(4, 22);
+            this.tabExperiment.Location = new System.Drawing.Point(8, 39);
+            this.tabExperiment.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tabExperiment.Name = "tabExperiment";
-            this.tabExperiment.Padding = new System.Windows.Forms.Padding(3);
-            this.tabExperiment.Size = new System.Drawing.Size(1571, 830);
+            this.tabExperiment.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabExperiment.Size = new System.Drawing.Size(3142, 1599);
             this.tabExperiment.TabIndex = 2;
             this.tabExperiment.Text = "Experiment";
             this.tabExperiment.UseVisualStyleBackColor = true;
@@ -478,9 +506,10 @@ namespace mass_groundstation_v2
             // btnExpLiftOff
             // 
             this.btnExpLiftOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExpLiftOff.Location = new System.Drawing.Point(125, 687);
+            this.btnExpLiftOff.Location = new System.Drawing.Point(250, 1321);
+            this.btnExpLiftOff.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpLiftOff.Name = "btnExpLiftOff";
-            this.btnExpLiftOff.Size = new System.Drawing.Size(181, 74);
+            this.btnExpLiftOff.Size = new System.Drawing.Size(362, 142);
             this.btnExpLiftOff.TabIndex = 13;
             this.btnExpLiftOff.Text = "Balloon Lift Off";
             this.btnExpLiftOff.UseVisualStyleBackColor = true;
@@ -503,9 +532,11 @@ namespace mass_groundstation_v2
             this.groupExpManualInflation.Controls.Add(this.btnExpInflationOnValve3);
             this.groupExpManualInflation.Controls.Add(this.btnExpInflationOnValve2);
             this.groupExpManualInflation.Controls.Add(this.btnExpInflationOnValve1);
-            this.groupExpManualInflation.Location = new System.Drawing.Point(7, 349);
+            this.groupExpManualInflation.Location = new System.Drawing.Point(14, 671);
+            this.groupExpManualInflation.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupExpManualInflation.Name = "groupExpManualInflation";
-            this.groupExpManualInflation.Size = new System.Drawing.Size(739, 168);
+            this.groupExpManualInflation.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupExpManualInflation.Size = new System.Drawing.Size(1478, 323);
             this.groupExpManualInflation.TabIndex = 12;
             this.groupExpManualInflation.TabStop = false;
             this.groupExpManualInflation.Text = "Manual Inflation";
@@ -515,9 +546,10 @@ namespace mass_groundstation_v2
             this.cbExpManualInflateLock.AutoSize = true;
             this.cbExpManualInflateLock.Checked = true;
             this.cbExpManualInflateLock.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbExpManualInflateLock.Location = new System.Drawing.Point(6, 19);
+            this.cbExpManualInflateLock.Location = new System.Drawing.Point(12, 37);
+            this.cbExpManualInflateLock.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cbExpManualInflateLock.Name = "cbExpManualInflateLock";
-            this.cbExpManualInflateLock.Size = new System.Drawing.Size(50, 17);
+            this.cbExpManualInflateLock.Size = new System.Drawing.Size(90, 29);
             this.cbExpManualInflateLock.TabIndex = 19;
             this.cbExpManualInflateLock.Text = "Lock";
             this.cbExpManualInflateLock.UseVisualStyleBackColor = true;
@@ -525,9 +557,10 @@ namespace mass_groundstation_v2
             // 
             // numPulseV3Multi
             // 
-            this.numPulseV3Multi.Location = new System.Drawing.Point(631, 89);
+            this.numPulseV3Multi.Location = new System.Drawing.Point(1262, 171);
+            this.numPulseV3Multi.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.numPulseV3Multi.Name = "numPulseV3Multi";
-            this.numPulseV3Multi.Size = new System.Drawing.Size(63, 20);
+            this.numPulseV3Multi.Size = new System.Drawing.Size(126, 31);
             this.numPulseV3Multi.TabIndex = 18;
             this.numPulseV3Multi.Value = new decimal(new int[] {
             5,
@@ -537,9 +570,10 @@ namespace mass_groundstation_v2
             // 
             // numPulseV1Multi
             // 
-            this.numPulseV1Multi.Location = new System.Drawing.Point(631, 31);
+            this.numPulseV1Multi.Location = new System.Drawing.Point(1262, 60);
+            this.numPulseV1Multi.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.numPulseV1Multi.Name = "numPulseV1Multi";
-            this.numPulseV1Multi.Size = new System.Drawing.Size(63, 20);
+            this.numPulseV1Multi.Size = new System.Drawing.Size(126, 31);
             this.numPulseV1Multi.TabIndex = 17;
             this.numPulseV1Multi.Value = new decimal(new int[] {
             5,
@@ -549,14 +583,15 @@ namespace mass_groundstation_v2
             // 
             // numV3PulseTime
             // 
-            this.numV3PulseTime.Location = new System.Drawing.Point(562, 89);
+            this.numV3PulseTime.Location = new System.Drawing.Point(1124, 171);
+            this.numV3PulseTime.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.numV3PulseTime.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.numV3PulseTime.Name = "numV3PulseTime";
-            this.numV3PulseTime.Size = new System.Drawing.Size(63, 20);
+            this.numV3PulseTime.Size = new System.Drawing.Size(126, 31);
             this.numV3PulseTime.TabIndex = 16;
             this.numV3PulseTime.Value = new decimal(new int[] {
             100,
@@ -566,14 +601,15 @@ namespace mass_groundstation_v2
             // 
             // numV1PulseTime
             // 
-            this.numV1PulseTime.Location = new System.Drawing.Point(562, 31);
+            this.numV1PulseTime.Location = new System.Drawing.Point(1124, 60);
+            this.numV1PulseTime.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.numV1PulseTime.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.numV1PulseTime.Name = "numV1PulseTime";
-            this.numV1PulseTime.Size = new System.Drawing.Size(63, 20);
+            this.numV1PulseTime.Size = new System.Drawing.Size(126, 31);
             this.numV1PulseTime.TabIndex = 15;
             this.numV1PulseTime.Value = new decimal(new int[] {
             100,
@@ -584,9 +620,10 @@ namespace mass_groundstation_v2
             // btnExpValve3Pulse
             // 
             this.btnExpValve3Pulse.Enabled = false;
-            this.btnExpValve3Pulse.Location = new System.Drawing.Point(400, 86);
+            this.btnExpValve3Pulse.Location = new System.Drawing.Point(800, 165);
+            this.btnExpValve3Pulse.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpValve3Pulse.Name = "btnExpValve3Pulse";
-            this.btnExpValve3Pulse.Size = new System.Drawing.Size(156, 23);
+            this.btnExpValve3Pulse.Size = new System.Drawing.Size(312, 44);
             this.btnExpValve3Pulse.TabIndex = 14;
             this.btnExpValve3Pulse.Text = "Valve 3 - PULSE";
             this.btnExpValve3Pulse.UseVisualStyleBackColor = true;
@@ -595,9 +632,10 @@ namespace mass_groundstation_v2
             // btnExpValve1Pulse
             // 
             this.btnExpValve1Pulse.Enabled = false;
-            this.btnExpValve1Pulse.Location = new System.Drawing.Point(400, 28);
+            this.btnExpValve1Pulse.Location = new System.Drawing.Point(800, 54);
+            this.btnExpValve1Pulse.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpValve1Pulse.Name = "btnExpValve1Pulse";
-            this.btnExpValve1Pulse.Size = new System.Drawing.Size(156, 23);
+            this.btnExpValve1Pulse.Size = new System.Drawing.Size(312, 44);
             this.btnExpValve1Pulse.TabIndex = 13;
             this.btnExpValve1Pulse.Text = "Valve 1 - PULSE";
             this.btnExpValve1Pulse.UseVisualStyleBackColor = true;
@@ -606,9 +644,10 @@ namespace mass_groundstation_v2
             // btnExpInflationOffValve4
             // 
             this.btnExpInflationOffValve4.Enabled = false;
-            this.btnExpInflationOffValve4.Location = new System.Drawing.Point(245, 115);
+            this.btnExpInflationOffValve4.Location = new System.Drawing.Point(490, 221);
+            this.btnExpInflationOffValve4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationOffValve4.Name = "btnExpInflationOffValve4";
-            this.btnExpInflationOffValve4.Size = new System.Drawing.Size(149, 23);
+            this.btnExpInflationOffValve4.Size = new System.Drawing.Size(298, 44);
             this.btnExpInflationOffValve4.TabIndex = 12;
             this.btnExpInflationOffValve4.Text = "Valve 4 - OFF";
             this.btnExpInflationOffValve4.UseVisualStyleBackColor = true;
@@ -617,9 +656,10 @@ namespace mass_groundstation_v2
             // btnExpInflationOffValve3
             // 
             this.btnExpInflationOffValve3.Enabled = false;
-            this.btnExpInflationOffValve3.Location = new System.Drawing.Point(245, 86);
+            this.btnExpInflationOffValve3.Location = new System.Drawing.Point(490, 165);
+            this.btnExpInflationOffValve3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationOffValve3.Name = "btnExpInflationOffValve3";
-            this.btnExpInflationOffValve3.Size = new System.Drawing.Size(149, 23);
+            this.btnExpInflationOffValve3.Size = new System.Drawing.Size(298, 44);
             this.btnExpInflationOffValve3.TabIndex = 11;
             this.btnExpInflationOffValve3.Text = "Valve 3 - OFF";
             this.btnExpInflationOffValve3.UseVisualStyleBackColor = true;
@@ -628,9 +668,10 @@ namespace mass_groundstation_v2
             // btnExpInflationOffValve2
             // 
             this.btnExpInflationOffValve2.Enabled = false;
-            this.btnExpInflationOffValve2.Location = new System.Drawing.Point(245, 57);
+            this.btnExpInflationOffValve2.Location = new System.Drawing.Point(490, 110);
+            this.btnExpInflationOffValve2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationOffValve2.Name = "btnExpInflationOffValve2";
-            this.btnExpInflationOffValve2.Size = new System.Drawing.Size(149, 23);
+            this.btnExpInflationOffValve2.Size = new System.Drawing.Size(298, 44);
             this.btnExpInflationOffValve2.TabIndex = 10;
             this.btnExpInflationOffValve2.Text = "Valve 2 - OFF";
             this.btnExpInflationOffValve2.UseVisualStyleBackColor = true;
@@ -639,9 +680,10 @@ namespace mass_groundstation_v2
             // btnExpInflationOffValve1
             // 
             this.btnExpInflationOffValve1.Enabled = false;
-            this.btnExpInflationOffValve1.Location = new System.Drawing.Point(245, 28);
+            this.btnExpInflationOffValve1.Location = new System.Drawing.Point(490, 54);
+            this.btnExpInflationOffValve1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationOffValve1.Name = "btnExpInflationOffValve1";
-            this.btnExpInflationOffValve1.Size = new System.Drawing.Size(149, 23);
+            this.btnExpInflationOffValve1.Size = new System.Drawing.Size(298, 44);
             this.btnExpInflationOffValve1.TabIndex = 9;
             this.btnExpInflationOffValve1.Text = "Valve 1 - OFF";
             this.btnExpInflationOffValve1.UseVisualStyleBackColor = true;
@@ -650,9 +692,10 @@ namespace mass_groundstation_v2
             // btnExpInflationOnValve4
             // 
             this.btnExpInflationOnValve4.Enabled = false;
-            this.btnExpInflationOnValve4.Location = new System.Drawing.Point(83, 115);
+            this.btnExpInflationOnValve4.Location = new System.Drawing.Point(166, 221);
+            this.btnExpInflationOnValve4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationOnValve4.Name = "btnExpInflationOnValve4";
-            this.btnExpInflationOnValve4.Size = new System.Drawing.Size(156, 23);
+            this.btnExpInflationOnValve4.Size = new System.Drawing.Size(312, 44);
             this.btnExpInflationOnValve4.TabIndex = 8;
             this.btnExpInflationOnValve4.Text = "Valve 4 - ON";
             this.btnExpInflationOnValve4.UseVisualStyleBackColor = true;
@@ -661,9 +704,10 @@ namespace mass_groundstation_v2
             // btnExpInflationOnValve3
             // 
             this.btnExpInflationOnValve3.Enabled = false;
-            this.btnExpInflationOnValve3.Location = new System.Drawing.Point(83, 86);
+            this.btnExpInflationOnValve3.Location = new System.Drawing.Point(166, 165);
+            this.btnExpInflationOnValve3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationOnValve3.Name = "btnExpInflationOnValve3";
-            this.btnExpInflationOnValve3.Size = new System.Drawing.Size(156, 23);
+            this.btnExpInflationOnValve3.Size = new System.Drawing.Size(312, 44);
             this.btnExpInflationOnValve3.TabIndex = 7;
             this.btnExpInflationOnValve3.Text = "Valve 3 - ON";
             this.btnExpInflationOnValve3.UseVisualStyleBackColor = true;
@@ -672,9 +716,10 @@ namespace mass_groundstation_v2
             // btnExpInflationOnValve2
             // 
             this.btnExpInflationOnValve2.Enabled = false;
-            this.btnExpInflationOnValve2.Location = new System.Drawing.Point(83, 57);
+            this.btnExpInflationOnValve2.Location = new System.Drawing.Point(166, 110);
+            this.btnExpInflationOnValve2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationOnValve2.Name = "btnExpInflationOnValve2";
-            this.btnExpInflationOnValve2.Size = new System.Drawing.Size(156, 23);
+            this.btnExpInflationOnValve2.Size = new System.Drawing.Size(312, 44);
             this.btnExpInflationOnValve2.TabIndex = 6;
             this.btnExpInflationOnValve2.Text = "Valve 2 - ON";
             this.btnExpInflationOnValve2.UseVisualStyleBackColor = true;
@@ -683,9 +728,10 @@ namespace mass_groundstation_v2
             // btnExpInflationOnValve1
             // 
             this.btnExpInflationOnValve1.Enabled = false;
-            this.btnExpInflationOnValve1.Location = new System.Drawing.Point(83, 28);
+            this.btnExpInflationOnValve1.Location = new System.Drawing.Point(166, 54);
+            this.btnExpInflationOnValve1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationOnValve1.Name = "btnExpInflationOnValve1";
-            this.btnExpInflationOnValve1.Size = new System.Drawing.Size(156, 23);
+            this.btnExpInflationOnValve1.Size = new System.Drawing.Size(312, 44);
             this.btnExpInflationOnValve1.TabIndex = 5;
             this.btnExpInflationOnValve1.Text = "Valve 1 - ON";
             this.btnExpInflationOnValve1.UseVisualStyleBackColor = true;
@@ -695,9 +741,10 @@ namespace mass_groundstation_v2
             // 
             this.pictureExpLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureExpLogo.Image")));
             this.pictureExpLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureExpLogo.InitialImage")));
-            this.pictureExpLogo.Location = new System.Drawing.Point(410, 634);
+            this.pictureExpLogo.Location = new System.Drawing.Point(820, 1219);
+            this.pictureExpLogo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.pictureExpLogo.Name = "pictureExpLogo";
-            this.pictureExpLogo.Size = new System.Drawing.Size(241, 190);
+            this.pictureExpLogo.Size = new System.Drawing.Size(482, 365);
             this.pictureExpLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureExpLogo.TabIndex = 9;
             this.pictureExpLogo.TabStop = false;
@@ -717,9 +764,11 @@ namespace mass_groundstation_v2
             this.groupExpPneu.Controls.Add(this.tbExpPneuOutsideStructuresPressure);
             this.groupExpPneu.Controls.Add(this.pictureExpPneu);
             this.groupExpPneu.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupExpPneu.Location = new System.Drawing.Point(752, 6);
+            this.groupExpPneu.Location = new System.Drawing.Point(1504, 12);
+            this.groupExpPneu.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupExpPneu.Name = "groupExpPneu";
-            this.groupExpPneu.Size = new System.Drawing.Size(813, 818);
+            this.groupExpPneu.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupExpPneu.Size = new System.Drawing.Size(1626, 1573);
             this.groupExpPneu.TabIndex = 11;
             this.groupExpPneu.TabStop = false;
             this.groupExpPneu.Text = "Pneumatics Overview";
@@ -727,97 +776,108 @@ namespace mass_groundstation_v2
             // lblExpPneuInsideStructuresPressure
             // 
             this.lblExpPneuInsideStructuresPressure.AutoSize = true;
-            this.lblExpPneuInsideStructuresPressure.Location = new System.Drawing.Point(374, 452);
+            this.lblExpPneuInsideStructuresPressure.Location = new System.Drawing.Point(748, 869);
+            this.lblExpPneuInsideStructuresPressure.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExpPneuInsideStructuresPressure.Name = "lblExpPneuInsideStructuresPressure";
-            this.lblExpPneuInsideStructuresPressure.Size = new System.Drawing.Size(86, 26);
+            this.lblExpPneuInsideStructuresPressure.Size = new System.Drawing.Size(175, 52);
             this.lblExpPneuInsideStructuresPressure.TabIndex = 28;
             this.lblExpPneuInsideStructuresPressure.Text = "Inside Structures\r\nPressure";
             // 
             // lblExpPneuOutsideStructuresPressure
             // 
             this.lblExpPneuOutsideStructuresPressure.AutoSize = true;
-            this.lblExpPneuOutsideStructuresPressure.Location = new System.Drawing.Point(374, 41);
+            this.lblExpPneuOutsideStructuresPressure.Location = new System.Drawing.Point(748, 79);
+            this.lblExpPneuOutsideStructuresPressure.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExpPneuOutsideStructuresPressure.Name = "lblExpPneuOutsideStructuresPressure";
-            this.lblExpPneuOutsideStructuresPressure.Size = new System.Drawing.Size(97, 26);
+            this.lblExpPneuOutsideStructuresPressure.Size = new System.Drawing.Size(198, 52);
             this.lblExpPneuOutsideStructuresPressure.TabIndex = 27;
             this.lblExpPneuOutsideStructuresPressure.Text = "Outside Structures \r\nPressure";
             // 
             // lblExpPneuTankPressure
             // 
             this.lblExpPneuTankPressure.AutoSize = true;
-            this.lblExpPneuTankPressure.Location = new System.Drawing.Point(53, 191);
+            this.lblExpPneuTankPressure.Location = new System.Drawing.Point(106, 367);
+            this.lblExpPneuTankPressure.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExpPneuTankPressure.Name = "lblExpPneuTankPressure";
-            this.lblExpPneuTankPressure.Size = new System.Drawing.Size(76, 13);
+            this.lblExpPneuTankPressure.Size = new System.Drawing.Size(152, 26);
             this.lblExpPneuTankPressure.TabIndex = 26;
             this.lblExpPneuTankPressure.Text = "Tank Pressure";
             // 
             // labelExpPneuValve4
             // 
             this.labelExpPneuValve4.AutoSize = true;
-            this.labelExpPneuValve4.Location = new System.Drawing.Point(632, 178);
+            this.labelExpPneuValve4.Location = new System.Drawing.Point(1264, 342);
+            this.labelExpPneuValve4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelExpPneuValve4.Name = "labelExpPneuValve4";
-            this.labelExpPneuValve4.Size = new System.Drawing.Size(13, 13);
+            this.labelExpPneuValve4.Size = new System.Drawing.Size(24, 26);
             this.labelExpPneuValve4.TabIndex = 25;
             this.labelExpPneuValve4.Text = "4";
             // 
             // labelExpPneuValve3
             // 
             this.labelExpPneuValve3.AutoSize = true;
-            this.labelExpPneuValve3.Location = new System.Drawing.Point(507, 313);
+            this.labelExpPneuValve3.Location = new System.Drawing.Point(1014, 602);
+            this.labelExpPneuValve3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelExpPneuValve3.Name = "labelExpPneuValve3";
-            this.labelExpPneuValve3.Size = new System.Drawing.Size(13, 13);
+            this.labelExpPneuValve3.Size = new System.Drawing.Size(24, 26);
             this.labelExpPneuValve3.TabIndex = 24;
             this.labelExpPneuValve3.Text = "3";
             // 
             // labelExpPneuValve2
             // 
             this.labelExpPneuValve2.AutoSize = true;
-            this.labelExpPneuValve2.Location = new System.Drawing.Point(632, 585);
+            this.labelExpPneuValve2.Location = new System.Drawing.Point(1264, 1125);
+            this.labelExpPneuValve2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelExpPneuValve2.Name = "labelExpPneuValve2";
-            this.labelExpPneuValve2.Size = new System.Drawing.Size(13, 13);
+            this.labelExpPneuValve2.Size = new System.Drawing.Size(24, 26);
             this.labelExpPneuValve2.TabIndex = 23;
             this.labelExpPneuValve2.Text = "2";
             // 
             // labelExpPneuValve1
             // 
             this.labelExpPneuValve1.AutoSize = true;
-            this.labelExpPneuValve1.Location = new System.Drawing.Point(507, 722);
+            this.labelExpPneuValve1.Location = new System.Drawing.Point(1014, 1388);
+            this.labelExpPneuValve1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelExpPneuValve1.Name = "labelExpPneuValve1";
-            this.labelExpPneuValve1.Size = new System.Drawing.Size(13, 13);
+            this.labelExpPneuValve1.Size = new System.Drawing.Size(24, 26);
             this.labelExpPneuValve1.TabIndex = 22;
             this.labelExpPneuValve1.Text = "1";
             // 
             // tbExpPneuTankPressure
             // 
-            this.tbExpPneuTankPressure.Location = new System.Drawing.Point(56, 207);
+            this.tbExpPneuTankPressure.Location = new System.Drawing.Point(112, 398);
+            this.tbExpPneuTankPressure.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbExpPneuTankPressure.Name = "tbExpPneuTankPressure";
             this.tbExpPneuTankPressure.ReadOnly = true;
-            this.tbExpPneuTankPressure.Size = new System.Drawing.Size(73, 20);
+            this.tbExpPneuTankPressure.Size = new System.Drawing.Size(142, 32);
             this.tbExpPneuTankPressure.TabIndex = 8;
             // 
             // tbExpPneuInsideStructuresPressure
             // 
             this.tbExpPneuInsideStructuresPressure.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbExpPneuInsideStructuresPressure.Location = new System.Drawing.Point(377, 481);
+            this.tbExpPneuInsideStructuresPressure.Location = new System.Drawing.Point(754, 925);
+            this.tbExpPneuInsideStructuresPressure.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbExpPneuInsideStructuresPressure.Name = "tbExpPneuInsideStructuresPressure";
             this.tbExpPneuInsideStructuresPressure.ReadOnly = true;
-            this.tbExpPneuInsideStructuresPressure.Size = new System.Drawing.Size(73, 20);
+            this.tbExpPneuInsideStructuresPressure.Size = new System.Drawing.Size(142, 32);
             this.tbExpPneuInsideStructuresPressure.TabIndex = 7;
             // 
             // tbExpPneuOutsideStructuresPressure
             // 
-            this.tbExpPneuOutsideStructuresPressure.Location = new System.Drawing.Point(377, 70);
+            this.tbExpPneuOutsideStructuresPressure.Location = new System.Drawing.Point(754, 135);
+            this.tbExpPneuOutsideStructuresPressure.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbExpPneuOutsideStructuresPressure.Name = "tbExpPneuOutsideStructuresPressure";
             this.tbExpPneuOutsideStructuresPressure.ReadOnly = true;
-            this.tbExpPneuOutsideStructuresPressure.Size = new System.Drawing.Size(73, 20);
+            this.tbExpPneuOutsideStructuresPressure.Size = new System.Drawing.Size(142, 32);
             this.tbExpPneuOutsideStructuresPressure.TabIndex = 6;
             // 
             // pictureExpPneu
             // 
             this.pictureExpPneu.Image = ((System.Drawing.Image)(resources.GetObject("pictureExpPneu.Image")));
-            this.pictureExpPneu.Location = new System.Drawing.Point(46, 41);
+            this.pictureExpPneu.Location = new System.Drawing.Point(92, 79);
+            this.pictureExpPneu.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.pictureExpPneu.Name = "pictureExpPneu";
-            this.pictureExpPneu.Size = new System.Drawing.Size(721, 740);
+            this.pictureExpPneu.Size = new System.Drawing.Size(1442, 1423);
             this.pictureExpPneu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureExpPneu.TabIndex = 0;
             this.pictureExpPneu.TabStop = false;
@@ -829,9 +889,11 @@ namespace mass_groundstation_v2
             this.groupExpLed.Controls.Add(this.btnExpLedOffStructure1);
             this.groupExpLed.Controls.Add(this.btnExpLedOnStructure2);
             this.groupExpLed.Controls.Add(this.btnExpLedOnStructure1);
-            this.groupExpLed.Location = new System.Drawing.Point(7, 523);
+            this.groupExpLed.Location = new System.Drawing.Point(14, 1006);
+            this.groupExpLed.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupExpLed.Name = "groupExpLed";
-            this.groupExpLed.Size = new System.Drawing.Size(740, 105);
+            this.groupExpLed.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupExpLed.Size = new System.Drawing.Size(1480, 202);
             this.groupExpLed.TabIndex = 8;
             this.groupExpLed.TabStop = false;
             this.groupExpLed.Text = "UV Leds";
@@ -841,9 +903,10 @@ namespace mass_groundstation_v2
             this.cbExpUVLock.AutoSize = true;
             this.cbExpUVLock.Checked = true;
             this.cbExpUVLock.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbExpUVLock.Location = new System.Drawing.Point(6, 19);
+            this.cbExpUVLock.Location = new System.Drawing.Point(12, 37);
+            this.cbExpUVLock.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cbExpUVLock.Name = "cbExpUVLock";
-            this.cbExpUVLock.Size = new System.Drawing.Size(50, 17);
+            this.cbExpUVLock.Size = new System.Drawing.Size(90, 29);
             this.cbExpUVLock.TabIndex = 20;
             this.cbExpUVLock.Text = "Lock";
             this.cbExpUVLock.UseVisualStyleBackColor = true;
@@ -852,9 +915,10 @@ namespace mass_groundstation_v2
             // btnExpLedOffStructure2
             // 
             this.btnExpLedOffStructure2.Enabled = false;
-            this.btnExpLedOffStructure2.Location = new System.Drawing.Point(403, 60);
+            this.btnExpLedOffStructure2.Location = new System.Drawing.Point(806, 115);
+            this.btnExpLedOffStructure2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpLedOffStructure2.Name = "btnExpLedOffStructure2";
-            this.btnExpLedOffStructure2.Size = new System.Drawing.Size(253, 23);
+            this.btnExpLedOffStructure2.Size = new System.Drawing.Size(506, 44);
             this.btnExpLedOffStructure2.TabIndex = 4;
             this.btnExpLedOffStructure2.Text = "UV - OFF Structure 2";
             this.btnExpLedOffStructure2.UseVisualStyleBackColor = true;
@@ -863,9 +927,10 @@ namespace mass_groundstation_v2
             // btnExpLedOffStructure1
             // 
             this.btnExpLedOffStructure1.Enabled = false;
-            this.btnExpLedOffStructure1.Location = new System.Drawing.Point(86, 60);
+            this.btnExpLedOffStructure1.Location = new System.Drawing.Point(172, 115);
+            this.btnExpLedOffStructure1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpLedOffStructure1.Name = "btnExpLedOffStructure1";
-            this.btnExpLedOffStructure1.Size = new System.Drawing.Size(253, 23);
+            this.btnExpLedOffStructure1.Size = new System.Drawing.Size(506, 44);
             this.btnExpLedOffStructure1.TabIndex = 3;
             this.btnExpLedOffStructure1.Text = "UV - OFF Structure 1";
             this.btnExpLedOffStructure1.UseVisualStyleBackColor = true;
@@ -874,9 +939,10 @@ namespace mass_groundstation_v2
             // btnExpLedOnStructure2
             // 
             this.btnExpLedOnStructure2.Enabled = false;
-            this.btnExpLedOnStructure2.Location = new System.Drawing.Point(403, 31);
+            this.btnExpLedOnStructure2.Location = new System.Drawing.Point(806, 60);
+            this.btnExpLedOnStructure2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpLedOnStructure2.Name = "btnExpLedOnStructure2";
-            this.btnExpLedOnStructure2.Size = new System.Drawing.Size(253, 23);
+            this.btnExpLedOnStructure2.Size = new System.Drawing.Size(506, 44);
             this.btnExpLedOnStructure2.TabIndex = 2;
             this.btnExpLedOnStructure2.Text = "UV - ON Structure 2";
             this.btnExpLedOnStructure2.UseVisualStyleBackColor = true;
@@ -885,9 +951,10 @@ namespace mass_groundstation_v2
             // btnExpLedOnStructure1
             // 
             this.btnExpLedOnStructure1.Enabled = false;
-            this.btnExpLedOnStructure1.Location = new System.Drawing.Point(86, 31);
+            this.btnExpLedOnStructure1.Location = new System.Drawing.Point(172, 60);
+            this.btnExpLedOnStructure1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpLedOnStructure1.Name = "btnExpLedOnStructure1";
-            this.btnExpLedOnStructure1.Size = new System.Drawing.Size(253, 23);
+            this.btnExpLedOnStructure1.Size = new System.Drawing.Size(506, 44);
             this.btnExpLedOnStructure1.TabIndex = 1;
             this.btnExpLedOnStructure1.Text = "UV - ON Structure 1";
             this.btnExpLedOnStructure1.UseVisualStyleBackColor = true;
@@ -900,9 +967,11 @@ namespace mass_groundstation_v2
             this.groupExpAutoInflation.Controls.Add(this.btnExpInflationStopInside);
             this.groupExpAutoInflation.Controls.Add(this.btnExpInflationStartOutside);
             this.groupExpAutoInflation.Controls.Add(this.btnExpInflationStartInside);
-            this.groupExpAutoInflation.Location = new System.Drawing.Point(6, 234);
+            this.groupExpAutoInflation.Location = new System.Drawing.Point(12, 450);
+            this.groupExpAutoInflation.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupExpAutoInflation.Name = "groupExpAutoInflation";
-            this.groupExpAutoInflation.Size = new System.Drawing.Size(740, 108);
+            this.groupExpAutoInflation.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupExpAutoInflation.Size = new System.Drawing.Size(1480, 208);
             this.groupExpAutoInflation.TabIndex = 7;
             this.groupExpAutoInflation.TabStop = false;
             this.groupExpAutoInflation.Text = "Automated Inflation";
@@ -912,9 +981,10 @@ namespace mass_groundstation_v2
             this.cbExpAutoInflateLock.AutoSize = true;
             this.cbExpAutoInflateLock.Checked = true;
             this.cbExpAutoInflateLock.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbExpAutoInflateLock.Location = new System.Drawing.Point(6, 19);
+            this.cbExpAutoInflateLock.Location = new System.Drawing.Point(12, 37);
+            this.cbExpAutoInflateLock.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cbExpAutoInflateLock.Name = "cbExpAutoInflateLock";
-            this.cbExpAutoInflateLock.Size = new System.Drawing.Size(50, 17);
+            this.cbExpAutoInflateLock.Size = new System.Drawing.Size(90, 29);
             this.cbExpAutoInflateLock.TabIndex = 9;
             this.cbExpAutoInflateLock.Text = "Lock";
             this.cbExpAutoInflateLock.UseVisualStyleBackColor = true;
@@ -923,9 +993,10 @@ namespace mass_groundstation_v2
             // btnExpInflationStopOutside
             // 
             this.btnExpInflationStopOutside.Enabled = false;
-            this.btnExpInflationStopOutside.Location = new System.Drawing.Point(403, 60);
+            this.btnExpInflationStopOutside.Location = new System.Drawing.Point(806, 115);
+            this.btnExpInflationStopOutside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationStopOutside.Name = "btnExpInflationStopOutside";
-            this.btnExpInflationStopOutside.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationStopOutside.Size = new System.Drawing.Size(506, 44);
             this.btnExpInflationStopOutside.TabIndex = 7;
             this.btnExpInflationStopOutside.Text = "Inflation Stop Outside";
             this.btnExpInflationStopOutside.UseVisualStyleBackColor = true;
@@ -934,9 +1005,10 @@ namespace mass_groundstation_v2
             // btnExpInflationStopInside
             // 
             this.btnExpInflationStopInside.Enabled = false;
-            this.btnExpInflationStopInside.Location = new System.Drawing.Point(84, 60);
+            this.btnExpInflationStopInside.Location = new System.Drawing.Point(168, 115);
+            this.btnExpInflationStopInside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationStopInside.Name = "btnExpInflationStopInside";
-            this.btnExpInflationStopInside.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationStopInside.Size = new System.Drawing.Size(506, 44);
             this.btnExpInflationStopInside.TabIndex = 6;
             this.btnExpInflationStopInside.Text = "Inflation Stop Inside";
             this.btnExpInflationStopInside.UseVisualStyleBackColor = true;
@@ -945,9 +1017,10 @@ namespace mass_groundstation_v2
             // btnExpInflationStartOutside
             // 
             this.btnExpInflationStartOutside.Enabled = false;
-            this.btnExpInflationStartOutside.Location = new System.Drawing.Point(404, 31);
+            this.btnExpInflationStartOutside.Location = new System.Drawing.Point(808, 60);
+            this.btnExpInflationStartOutside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationStartOutside.Name = "btnExpInflationStartOutside";
-            this.btnExpInflationStartOutside.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationStartOutside.Size = new System.Drawing.Size(506, 44);
             this.btnExpInflationStartOutside.TabIndex = 5;
             this.btnExpInflationStartOutside.Text = "Inflation Start Outside";
             this.btnExpInflationStartOutside.UseVisualStyleBackColor = true;
@@ -956,9 +1029,10 @@ namespace mass_groundstation_v2
             // btnExpInflationStartInside
             // 
             this.btnExpInflationStartInside.Enabled = false;
-            this.btnExpInflationStartInside.Location = new System.Drawing.Point(84, 31);
+            this.btnExpInflationStartInside.Location = new System.Drawing.Point(168, 60);
+            this.btnExpInflationStartInside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpInflationStartInside.Name = "btnExpInflationStartInside";
-            this.btnExpInflationStartInside.Size = new System.Drawing.Size(253, 23);
+            this.btnExpInflationStartInside.Size = new System.Drawing.Size(506, 44);
             this.btnExpInflationStartInside.TabIndex = 4;
             this.btnExpInflationStartInside.Text = "Inflation Start Inside";
             this.btnExpInflationStartInside.UseVisualStyleBackColor = true;
@@ -973,9 +1047,11 @@ namespace mass_groundstation_v2
             this.groupExpHDRM.Controls.Add(this.numExpHDRMActivationTimeInside);
             this.groupExpHDRM.Controls.Add(this.btnExpHDRMOutside);
             this.groupExpHDRM.Controls.Add(this.btnExpHDRMInside);
-            this.groupExpHDRM.Location = new System.Drawing.Point(6, 126);
+            this.groupExpHDRM.Location = new System.Drawing.Point(12, 242);
+            this.groupExpHDRM.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupExpHDRM.Name = "groupExpHDRM";
-            this.groupExpHDRM.Size = new System.Drawing.Size(740, 102);
+            this.groupExpHDRM.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupExpHDRM.Size = new System.Drawing.Size(1480, 196);
             this.groupExpHDRM.TabIndex = 5;
             this.groupExpHDRM.TabStop = false;
             this.groupExpHDRM.Text = "HDRM";
@@ -985,9 +1061,10 @@ namespace mass_groundstation_v2
             this.cbExpHdrmLock.AutoSize = true;
             this.cbExpHdrmLock.Checked = true;
             this.cbExpHdrmLock.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbExpHdrmLock.Location = new System.Drawing.Point(6, 19);
+            this.cbExpHdrmLock.Location = new System.Drawing.Point(12, 37);
+            this.cbExpHdrmLock.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cbExpHdrmLock.Name = "cbExpHdrmLock";
-            this.cbExpHdrmLock.Size = new System.Drawing.Size(50, 17);
+            this.cbExpHdrmLock.Size = new System.Drawing.Size(90, 29);
             this.cbExpHdrmLock.TabIndex = 8;
             this.cbExpHdrmLock.Text = "Lock";
             this.cbExpHdrmLock.UseVisualStyleBackColor = true;
@@ -996,26 +1073,29 @@ namespace mass_groundstation_v2
             // lblExpHDRMActivationTimeOutside
             // 
             this.lblExpHDRMActivationTimeOutside.AutoSize = true;
-            this.lblExpHDRMActivationTimeOutside.Location = new System.Drawing.Point(482, 60);
+            this.lblExpHDRMActivationTimeOutside.Location = new System.Drawing.Point(964, 115);
+            this.lblExpHDRMActivationTimeOutside.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExpHDRMActivationTimeOutside.Name = "lblExpHDRMActivationTimeOutside";
-            this.lblExpHDRMActivationTimeOutside.Size = new System.Drawing.Size(105, 13);
+            this.lblExpHDRMActivationTimeOutside.Size = new System.Drawing.Size(211, 25);
             this.lblExpHDRMActivationTimeOutside.TabIndex = 7;
             this.lblExpHDRMActivationTimeOutside.Text = "Activation Time in [s]";
             // 
             // lblExpHDRMActivationTimeInside
             // 
             this.lblExpHDRMActivationTimeInside.AutoSize = true;
-            this.lblExpHDRMActivationTimeInside.Location = new System.Drawing.Point(165, 60);
+            this.lblExpHDRMActivationTimeInside.Location = new System.Drawing.Point(330, 115);
+            this.lblExpHDRMActivationTimeInside.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExpHDRMActivationTimeInside.Name = "lblExpHDRMActivationTimeInside";
-            this.lblExpHDRMActivationTimeInside.Size = new System.Drawing.Size(105, 13);
+            this.lblExpHDRMActivationTimeInside.Size = new System.Drawing.Size(211, 25);
             this.lblExpHDRMActivationTimeInside.TabIndex = 6;
             this.lblExpHDRMActivationTimeInside.Text = "Activation Time in [s]";
             // 
             // numExpHDRMActivationTimeOutside
             // 
-            this.numExpHDRMActivationTimeOutside.Location = new System.Drawing.Point(593, 58);
+            this.numExpHDRMActivationTimeOutside.Location = new System.Drawing.Point(1186, 112);
+            this.numExpHDRMActivationTimeOutside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.numExpHDRMActivationTimeOutside.Name = "numExpHDRMActivationTimeOutside";
-            this.numExpHDRMActivationTimeOutside.Size = new System.Drawing.Size(64, 20);
+            this.numExpHDRMActivationTimeOutside.Size = new System.Drawing.Size(128, 31);
             this.numExpHDRMActivationTimeOutside.TabIndex = 3;
             this.numExpHDRMActivationTimeOutside.Value = new decimal(new int[] {
             3,
@@ -1025,9 +1105,10 @@ namespace mass_groundstation_v2
             // 
             // numExpHDRMActivationTimeInside
             // 
-            this.numExpHDRMActivationTimeInside.Location = new System.Drawing.Point(276, 58);
+            this.numExpHDRMActivationTimeInside.Location = new System.Drawing.Point(552, 112);
+            this.numExpHDRMActivationTimeInside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.numExpHDRMActivationTimeInside.Name = "numExpHDRMActivationTimeInside";
-            this.numExpHDRMActivationTimeInside.Size = new System.Drawing.Size(63, 20);
+            this.numExpHDRMActivationTimeInside.Size = new System.Drawing.Size(126, 31);
             this.numExpHDRMActivationTimeInside.TabIndex = 2;
             this.numExpHDRMActivationTimeInside.Value = new decimal(new int[] {
             3,
@@ -1038,9 +1119,10 @@ namespace mass_groundstation_v2
             // btnExpHDRMOutside
             // 
             this.btnExpHDRMOutside.Enabled = false;
-            this.btnExpHDRMOutside.Location = new System.Drawing.Point(403, 29);
+            this.btnExpHDRMOutside.Location = new System.Drawing.Point(806, 56);
+            this.btnExpHDRMOutside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpHDRMOutside.Name = "btnExpHDRMOutside";
-            this.btnExpHDRMOutside.Size = new System.Drawing.Size(254, 23);
+            this.btnExpHDRMOutside.Size = new System.Drawing.Size(508, 44);
             this.btnExpHDRMOutside.TabIndex = 1;
             this.btnExpHDRMOutside.Text = "Release HDRM Outside";
             this.btnExpHDRMOutside.UseVisualStyleBackColor = true;
@@ -1049,9 +1131,10 @@ namespace mass_groundstation_v2
             // btnExpHDRMInside
             // 
             this.btnExpHDRMInside.Enabled = false;
-            this.btnExpHDRMInside.Location = new System.Drawing.Point(86, 29);
+            this.btnExpHDRMInside.Location = new System.Drawing.Point(172, 56);
+            this.btnExpHDRMInside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpHDRMInside.Name = "btnExpHDRMInside";
-            this.btnExpHDRMInside.Size = new System.Drawing.Size(253, 23);
+            this.btnExpHDRMInside.Size = new System.Drawing.Size(506, 44);
             this.btnExpHDRMInside.TabIndex = 0;
             this.btnExpHDRMInside.Text = "Release HDRM Inside";
             this.btnExpHDRMInside.UseVisualStyleBackColor = true;
@@ -1072,9 +1155,11 @@ namespace mass_groundstation_v2
             this.groupExpPower.Controls.Add(this.tbExpPowerVoltageBX);
             this.groupExpPower.Controls.Add(this.lblExpPowerVoltage);
             this.groupExpPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupExpPower.Location = new System.Drawing.Point(6, 6);
+            this.groupExpPower.Location = new System.Drawing.Point(12, 12);
+            this.groupExpPower.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupExpPower.Name = "groupExpPower";
-            this.groupExpPower.Size = new System.Drawing.Size(740, 114);
+            this.groupExpPower.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupExpPower.Size = new System.Drawing.Size(1480, 219);
             this.groupExpPower.TabIndex = 4;
             this.groupExpPower.TabStop = false;
             this.groupExpPower.Text = "Power";
@@ -1083,9 +1168,10 @@ namespace mass_groundstation_v2
             // 
             this.picExpPower.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.picExpPower.Image = ((System.Drawing.Image)(resources.GetObject("picExpPower.Image")));
-            this.picExpPower.Location = new System.Drawing.Point(37, 19);
+            this.picExpPower.Location = new System.Drawing.Point(74, 37);
+            this.picExpPower.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.picExpPower.Name = "picExpPower";
-            this.picExpPower.Size = new System.Drawing.Size(158, 84);
+            this.picExpPower.Size = new System.Drawing.Size(316, 162);
             this.picExpPower.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picExpPower.TabIndex = 4;
             this.picExpPower.TabStop = false;
@@ -1094,9 +1180,10 @@ namespace mass_groundstation_v2
             // 
             this.lblExpPowerPower.AutoSize = true;
             this.lblExpPowerPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpPowerPower.Location = new System.Drawing.Point(557, 25);
+            this.lblExpPowerPower.Location = new System.Drawing.Point(1114, 48);
+            this.lblExpPowerPower.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExpPowerPower.Name = "lblExpPowerPower";
-            this.lblExpPowerPower.Size = new System.Drawing.Size(42, 13);
+            this.lblExpPowerPower.Size = new System.Drawing.Size(79, 26);
             this.lblExpPowerPower.TabIndex = 8;
             this.lblExpPowerPower.Text = "Power";
             // 
@@ -1104,51 +1191,57 @@ namespace mass_groundstation_v2
             // 
             this.lblExpPowerCurrent.AutoSize = true;
             this.lblExpPowerCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpPowerCurrent.Location = new System.Drawing.Point(451, 25);
+            this.lblExpPowerCurrent.Location = new System.Drawing.Point(902, 48);
+            this.lblExpPowerCurrent.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExpPowerCurrent.Name = "lblExpPowerCurrent";
-            this.lblExpPowerCurrent.Size = new System.Drawing.Size(48, 13);
+            this.lblExpPowerCurrent.Size = new System.Drawing.Size(91, 26);
             this.lblExpPowerCurrent.TabIndex = 1;
             this.lblExpPowerCurrent.Text = "Current";
             // 
             // tbExpPowerPowerEX
             // 
-            this.tbExpPowerPowerEX.Location = new System.Drawing.Point(560, 67);
+            this.tbExpPowerPowerEX.Location = new System.Drawing.Point(1120, 129);
+            this.tbExpPowerPowerEX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbExpPowerPowerEX.Name = "tbExpPowerPowerEX";
             this.tbExpPowerPowerEX.ReadOnly = true;
-            this.tbExpPowerPowerEX.Size = new System.Drawing.Size(100, 20);
+            this.tbExpPowerPowerEX.Size = new System.Drawing.Size(196, 32);
             this.tbExpPowerPowerEX.TabIndex = 7;
             // 
             // tbExpPowerPowerBX
             // 
-            this.tbExpPowerPowerBX.Location = new System.Drawing.Point(560, 41);
+            this.tbExpPowerPowerBX.Location = new System.Drawing.Point(1120, 79);
+            this.tbExpPowerPowerBX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbExpPowerPowerBX.Name = "tbExpPowerPowerBX";
             this.tbExpPowerPowerBX.ReadOnly = true;
-            this.tbExpPowerPowerBX.Size = new System.Drawing.Size(100, 20);
+            this.tbExpPowerPowerBX.Size = new System.Drawing.Size(196, 32);
             this.tbExpPowerPowerBX.TabIndex = 6;
             // 
             // tbExpPowerCurrentEX
             // 
-            this.tbExpPowerCurrentEX.Location = new System.Drawing.Point(454, 67);
+            this.tbExpPowerCurrentEX.Location = new System.Drawing.Point(908, 129);
+            this.tbExpPowerCurrentEX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbExpPowerCurrentEX.Name = "tbExpPowerCurrentEX";
             this.tbExpPowerCurrentEX.ReadOnly = true;
-            this.tbExpPowerCurrentEX.Size = new System.Drawing.Size(100, 20);
+            this.tbExpPowerCurrentEX.Size = new System.Drawing.Size(196, 32);
             this.tbExpPowerCurrentEX.TabIndex = 5;
             // 
             // tbExpPowerCurrentBX
             // 
-            this.tbExpPowerCurrentBX.Location = new System.Drawing.Point(454, 41);
+            this.tbExpPowerCurrentBX.Location = new System.Drawing.Point(908, 79);
+            this.tbExpPowerCurrentBX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbExpPowerCurrentBX.Name = "tbExpPowerCurrentBX";
             this.tbExpPowerCurrentBX.ReadOnly = true;
-            this.tbExpPowerCurrentBX.Size = new System.Drawing.Size(100, 20);
+            this.tbExpPowerCurrentBX.Size = new System.Drawing.Size(196, 32);
             this.tbExpPowerCurrentBX.TabIndex = 4;
             // 
             // lblExpPowerEXBat
             // 
             this.lblExpPowerEXBat.AutoSize = true;
             this.lblExpPowerEXBat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpPowerEXBat.Location = new System.Drawing.Point(225, 68);
+            this.lblExpPowerEXBat.Location = new System.Drawing.Point(450, 131);
+            this.lblExpPowerEXBat.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExpPowerEXBat.Name = "lblExpPowerEXBat";
-            this.lblExpPowerEXBat.Size = new System.Drawing.Size(115, 15);
+            this.lblExpPowerEXBat.Size = new System.Drawing.Size(225, 29);
             this.lblExpPowerEXBat.TabIndex = 1;
             this.lblExpPowerEXBat.Text = "EXTRA BATTERY";
             // 
@@ -1156,35 +1249,39 @@ namespace mass_groundstation_v2
             // 
             this.lblExpPowerBXBat.AutoSize = true;
             this.lblExpPowerBXBat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpPowerBXBat.Location = new System.Drawing.Point(225, 42);
+            this.lblExpPowerBXBat.Location = new System.Drawing.Point(450, 81);
+            this.lblExpPowerBXBat.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExpPowerBXBat.Name = "lblExpPowerBXBat";
-            this.lblExpPowerBXBat.Size = new System.Drawing.Size(117, 15);
+            this.lblExpPowerBXBat.Size = new System.Drawing.Size(226, 29);
             this.lblExpPowerBXBat.TabIndex = 0;
             this.lblExpPowerBXBat.Text = "BEXUS BATTERY";
             // 
             // tbExpPowerVoltageEX
             // 
-            this.tbExpPowerVoltageEX.Location = new System.Drawing.Point(348, 67);
+            this.tbExpPowerVoltageEX.Location = new System.Drawing.Point(696, 129);
+            this.tbExpPowerVoltageEX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbExpPowerVoltageEX.Name = "tbExpPowerVoltageEX";
             this.tbExpPowerVoltageEX.ReadOnly = true;
-            this.tbExpPowerVoltageEX.Size = new System.Drawing.Size(100, 20);
+            this.tbExpPowerVoltageEX.Size = new System.Drawing.Size(196, 32);
             this.tbExpPowerVoltageEX.TabIndex = 2;
             // 
             // tbExpPowerVoltageBX
             // 
-            this.tbExpPowerVoltageBX.Location = new System.Drawing.Point(348, 41);
+            this.tbExpPowerVoltageBX.Location = new System.Drawing.Point(696, 79);
+            this.tbExpPowerVoltageBX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbExpPowerVoltageBX.Name = "tbExpPowerVoltageBX";
             this.tbExpPowerVoltageBX.ReadOnly = true;
-            this.tbExpPowerVoltageBX.Size = new System.Drawing.Size(100, 20);
+            this.tbExpPowerVoltageBX.Size = new System.Drawing.Size(196, 32);
             this.tbExpPowerVoltageBX.TabIndex = 0;
             // 
             // lblExpPowerVoltage
             // 
             this.lblExpPowerVoltage.AutoSize = true;
             this.lblExpPowerVoltage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpPowerVoltage.Location = new System.Drawing.Point(345, 25);
+            this.lblExpPowerVoltage.Location = new System.Drawing.Point(690, 48);
+            this.lblExpPowerVoltage.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExpPowerVoltage.Name = "lblExpPowerVoltage";
-            this.lblExpPowerVoltage.Size = new System.Drawing.Size(50, 13);
+            this.lblExpPowerVoltage.Size = new System.Drawing.Size(93, 26);
             this.lblExpPowerVoltage.TabIndex = 3;
             this.lblExpPowerVoltage.Text = "Voltage";
             // 
@@ -1192,10 +1289,11 @@ namespace mass_groundstation_v2
             // 
             this.tabLogs.Controls.Add(this.cbLogsEnableLogFile);
             this.tabLogs.Controls.Add(this.rtbLogs);
-            this.tabLogs.Location = new System.Drawing.Point(4, 22);
+            this.tabLogs.Location = new System.Drawing.Point(8, 39);
+            this.tabLogs.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tabLogs.Name = "tabLogs";
-            this.tabLogs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLogs.Size = new System.Drawing.Size(1571, 830);
+            this.tabLogs.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabLogs.Size = new System.Drawing.Size(3142, 1599);
             this.tabLogs.TabIndex = 3;
             this.tabLogs.Text = "Logs";
             this.tabLogs.UseVisualStyleBackColor = true;
@@ -1205,23 +1303,26 @@ namespace mass_groundstation_v2
             this.cbLogsEnableLogFile.AutoSize = true;
             this.cbLogsEnableLogFile.Checked = true;
             this.cbLogsEnableLogFile.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbLogsEnableLogFile.Location = new System.Drawing.Point(7, 21);
+            this.cbLogsEnableLogFile.Location = new System.Drawing.Point(14, 40);
+            this.cbLogsEnableLogFile.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cbLogsEnableLogFile.Name = "cbLogsEnableLogFile";
-            this.cbLogsEnableLogFile.Size = new System.Drawing.Size(99, 17);
+            this.cbLogsEnableLogFile.Size = new System.Drawing.Size(194, 29);
             this.cbLogsEnableLogFile.TabIndex = 1;
             this.cbLogsEnableLogFile.Text = "Enable Log File";
             this.cbLogsEnableLogFile.UseVisualStyleBackColor = true;
             // 
             // rtbLogs
             // 
-            this.rtbLogs.Location = new System.Drawing.Point(6, 44);
+            this.rtbLogs.Location = new System.Drawing.Point(12, 85);
+            this.rtbLogs.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.rtbLogs.Name = "rtbLogs";
-            this.rtbLogs.Size = new System.Drawing.Size(1559, 780);
+            this.rtbLogs.Size = new System.Drawing.Size(3114, 1496);
             this.rtbLogs.TabIndex = 0;
             this.rtbLogs.Text = "";
             // 
             // tabCamera
             // 
+            this.tabCamera.Controls.Add(this.btnCamChangeFrameInterval);
             this.tabCamera.Controls.Add(this.label1);
             this.tabCamera.Controls.Add(this.numCamLiveInterval);
             this.tabCamera.Controls.Add(this.tbCameraTimeRemainOutside);
@@ -1235,35 +1336,73 @@ namespace mass_groundstation_v2
             this.tabCamera.Controls.Add(this.btnCamOutside);
             this.tabCamera.Controls.Add(this.btnCamInside);
             this.tabCamera.Controls.Add(this.groupCameraLive);
-            this.tabCamera.Location = new System.Drawing.Point(4, 22);
+            this.tabCamera.Location = new System.Drawing.Point(8, 39);
+            this.tabCamera.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tabCamera.Name = "tabCamera";
-            this.tabCamera.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCamera.Size = new System.Drawing.Size(1571, 830);
+            this.tabCamera.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabCamera.Size = new System.Drawing.Size(3142, 1599);
             this.tabCamera.TabIndex = 4;
             this.tabCamera.Text = "Camera";
             this.tabCamera.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(854, 54);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(149, 25);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Frame Interval";
+            // 
+            // numCamLiveInterval
+            // 
+            this.numCamLiveInterval.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numCamLiveInterval.Location = new System.Drawing.Point(706, 52);
+            this.numCamLiveInterval.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.numCamLiveInterval.Maximum = new decimal(new int[] {
+            60000,
+            0,
+            0,
+            0});
+            this.numCamLiveInterval.Name = "numCamLiveInterval";
+            this.numCamLiveInterval.Size = new System.Drawing.Size(136, 31);
+            this.numCamLiveInterval.TabIndex = 11;
+            this.numCamLiveInterval.Value = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
+            this.numCamLiveInterval.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
             // tbCameraTimeRemainOutside
             // 
             this.tbCameraTimeRemainOutside.Enabled = false;
-            this.tbCameraTimeRemainOutside.Location = new System.Drawing.Point(892, 54);
+            this.tbCameraTimeRemainOutside.Location = new System.Drawing.Point(1784, 104);
+            this.tbCameraTimeRemainOutside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbCameraTimeRemainOutside.Name = "tbCameraTimeRemainOutside";
-            this.tbCameraTimeRemainOutside.Size = new System.Drawing.Size(100, 20);
+            this.tbCameraTimeRemainOutside.Size = new System.Drawing.Size(196, 31);
             this.tbCameraTimeRemainOutside.TabIndex = 10;
             // 
             // tbCameraTimeRemainInside
             // 
             this.tbCameraTimeRemainInside.Enabled = false;
-            this.tbCameraTimeRemainInside.Location = new System.Drawing.Point(892, 25);
+            this.tbCameraTimeRemainInside.Location = new System.Drawing.Point(1784, 48);
+            this.tbCameraTimeRemainInside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbCameraTimeRemainInside.Name = "tbCameraTimeRemainInside";
-            this.tbCameraTimeRemainInside.Size = new System.Drawing.Size(100, 20);
+            this.tbCameraTimeRemainInside.Size = new System.Drawing.Size(196, 31);
             this.tbCameraTimeRemainInside.TabIndex = 9;
             // 
             // btnCamStartRecOutside
             // 
-            this.btnCamStartRecOutside.Location = new System.Drawing.Point(588, 52);
+            this.btnCamStartRecOutside.Location = new System.Drawing.Point(1176, 100);
+            this.btnCamStartRecOutside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnCamStartRecOutside.Name = "btnCamStartRecOutside";
-            this.btnCamStartRecOutside.Size = new System.Drawing.Size(146, 23);
+            this.btnCamStartRecOutside.Size = new System.Drawing.Size(292, 44);
             this.btnCamStartRecOutside.TabIndex = 8;
             this.btnCamStartRecOutside.Text = "Start Recording Outside";
             this.btnCamStartRecOutside.UseVisualStyleBackColor = true;
@@ -1271,9 +1410,10 @@ namespace mass_groundstation_v2
             // 
             // btnCamStopRecOutside
             // 
-            this.btnCamStopRecOutside.Location = new System.Drawing.Point(740, 52);
+            this.btnCamStopRecOutside.Location = new System.Drawing.Point(1480, 100);
+            this.btnCamStopRecOutside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnCamStopRecOutside.Name = "btnCamStopRecOutside";
-            this.btnCamStopRecOutside.Size = new System.Drawing.Size(146, 23);
+            this.btnCamStopRecOutside.Size = new System.Drawing.Size(292, 44);
             this.btnCamStopRecOutside.TabIndex = 7;
             this.btnCamStopRecOutside.Text = "Stop Recording Outside";
             this.btnCamStopRecOutside.UseVisualStyleBackColor = true;
@@ -1281,9 +1421,10 @@ namespace mass_groundstation_v2
             // 
             // btnCamStopRecInside
             // 
-            this.btnCamStopRecInside.Location = new System.Drawing.Point(740, 23);
+            this.btnCamStopRecInside.Location = new System.Drawing.Point(1480, 44);
+            this.btnCamStopRecInside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnCamStopRecInside.Name = "btnCamStopRecInside";
-            this.btnCamStopRecInside.Size = new System.Drawing.Size(146, 23);
+            this.btnCamStopRecInside.Size = new System.Drawing.Size(292, 44);
             this.btnCamStopRecInside.TabIndex = 6;
             this.btnCamStopRecInside.Text = "Stop Recording Inside";
             this.btnCamStopRecInside.UseVisualStyleBackColor = true;
@@ -1291,9 +1432,10 @@ namespace mass_groundstation_v2
             // 
             // btnCamStartRecInside
             // 
-            this.btnCamStartRecInside.Location = new System.Drawing.Point(588, 23);
+            this.btnCamStartRecInside.Location = new System.Drawing.Point(1176, 44);
+            this.btnCamStartRecInside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnCamStartRecInside.Name = "btnCamStartRecInside";
-            this.btnCamStartRecInside.Size = new System.Drawing.Size(146, 23);
+            this.btnCamStartRecInside.Size = new System.Drawing.Size(292, 44);
             this.btnCamStartRecInside.TabIndex = 5;
             this.btnCamStartRecInside.Text = "Start Recording Inside";
             this.btnCamStartRecInside.UseVisualStyleBackColor = true;
@@ -1301,9 +1443,10 @@ namespace mass_groundstation_v2
             // 
             // btnCamStopLive
             // 
-            this.btnCamStopLive.Location = new System.Drawing.Point(19, 53);
+            this.btnCamStopLive.Location = new System.Drawing.Point(38, 102);
+            this.btnCamStopLive.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnCamStopLive.Name = "btnCamStopLive";
-            this.btnCamStopLive.Size = new System.Drawing.Size(119, 23);
+            this.btnCamStopLive.Size = new System.Drawing.Size(238, 44);
             this.btnCamStopLive.TabIndex = 4;
             this.btnCamStopLive.Text = "Stop Live View";
             this.btnCamStopLive.UseVisualStyleBackColor = true;
@@ -1311,9 +1454,10 @@ namespace mass_groundstation_v2
             // 
             // btnCamStartLive
             // 
-            this.btnCamStartLive.Location = new System.Drawing.Point(19, 24);
+            this.btnCamStartLive.Location = new System.Drawing.Point(38, 46);
+            this.btnCamStartLive.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnCamStartLive.Name = "btnCamStartLive";
-            this.btnCamStartLive.Size = new System.Drawing.Size(119, 23);
+            this.btnCamStartLive.Size = new System.Drawing.Size(238, 44);
             this.btnCamStartLive.TabIndex = 3;
             this.btnCamStartLive.Text = "Start Live View";
             this.btnCamStartLive.UseVisualStyleBackColor = true;
@@ -1321,9 +1465,10 @@ namespace mass_groundstation_v2
             // 
             // btnCamOutside
             // 
-            this.btnCamOutside.Location = new System.Drawing.Point(149, 53);
+            this.btnCamOutside.Location = new System.Drawing.Point(298, 102);
+            this.btnCamOutside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnCamOutside.Name = "btnCamOutside";
-            this.btnCamOutside.Size = new System.Drawing.Size(151, 23);
+            this.btnCamOutside.Size = new System.Drawing.Size(302, 44);
             this.btnCamOutside.TabIndex = 2;
             this.btnCamOutside.Text = "Switch Live View Outside";
             this.btnCamOutside.UseVisualStyleBackColor = true;
@@ -1331,9 +1476,10 @@ namespace mass_groundstation_v2
             // 
             // btnCamInside
             // 
-            this.btnCamInside.Location = new System.Drawing.Point(149, 24);
+            this.btnCamInside.Location = new System.Drawing.Point(298, 46);
+            this.btnCamInside.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnCamInside.Name = "btnCamInside";
-            this.btnCamInside.Size = new System.Drawing.Size(151, 23);
+            this.btnCamInside.Size = new System.Drawing.Size(302, 44);
             this.btnCamInside.TabIndex = 1;
             this.btnCamInside.Text = "Switch Live View Inside";
             this.btnCamInside.UseVisualStyleBackColor = true;
@@ -1342,18 +1488,21 @@ namespace mass_groundstation_v2
             // groupCameraLive
             // 
             this.groupCameraLive.Controls.Add(this.pictureBoxLive);
-            this.groupCameraLive.Location = new System.Drawing.Point(6, 96);
+            this.groupCameraLive.Location = new System.Drawing.Point(12, 185);
+            this.groupCameraLive.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupCameraLive.Name = "groupCameraLive";
-            this.groupCameraLive.Size = new System.Drawing.Size(1559, 728);
+            this.groupCameraLive.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupCameraLive.Size = new System.Drawing.Size(3118, 1400);
             this.groupCameraLive.TabIndex = 0;
             this.groupCameraLive.TabStop = false;
             this.groupCameraLive.Text = "Live View";
             // 
             // pictureBoxLive
             // 
-            this.pictureBoxLive.Location = new System.Drawing.Point(143, 81);
+            this.pictureBoxLive.Location = new System.Drawing.Point(286, 156);
+            this.pictureBoxLive.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.pictureBoxLive.Name = "pictureBoxLive";
-            this.pictureBoxLive.Size = new System.Drawing.Size(1289, 585);
+            this.pictureBoxLive.Size = new System.Drawing.Size(2578, 1125);
             this.pictureBoxLive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxLive.TabIndex = 0;
             this.pictureBoxLive.TabStop = false;
@@ -1369,43 +1518,44 @@ namespace mass_groundstation_v2
             this.statusStripPingDescription,
             this.statusStripPing,
             this.statusStripFlightTime});
-            this.statusStrip.Location = new System.Drawing.Point(0, 860);
+            this.statusStrip.Location = new System.Drawing.Point(0, 1654);
             this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 28, 0);
             this.statusStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.statusStrip.Size = new System.Drawing.Size(1579, 22);
+            this.statusStrip.Size = new System.Drawing.Size(3004, 42);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
             // statusStripLabelLog
             // 
             this.statusStripLabelLog.Name = "statusStripLabelLog";
-            this.statusStripLabelLog.Size = new System.Drawing.Size(12, 17);
+            this.statusStripLabelLog.Size = new System.Drawing.Size(25, 32);
             this.statusStripLabelLog.Text = "-";
             // 
             // statusStripAlignment
             // 
             this.statusStripAlignment.Name = "statusStripAlignment";
-            this.statusStripAlignment.Size = new System.Drawing.Size(1137, 17);
+            this.statusStripAlignment.Size = new System.Drawing.Size(2167, 32);
             this.statusStripAlignment.Spring = true;
             // 
             // statusStripTCPDescription
             // 
             this.statusStripTCPDescription.Name = "statusStripTCPDescription";
-            this.statusStripTCPDescription.Size = new System.Drawing.Size(30, 17);
+            this.statusStripTCPDescription.Size = new System.Drawing.Size(60, 32);
             this.statusStripTCPDescription.Text = "TCP:";
             // 
             // statusStripTCP
             // 
             this.statusStripTCP.ForeColor = System.Drawing.Color.Red;
             this.statusStripTCP.Name = "statusStripTCP";
-            this.statusStripTCP.Size = new System.Drawing.Size(86, 17);
+            this.statusStripTCP.Size = new System.Drawing.Size(174, 32);
             this.statusStripTCP.Text = "Not connected";
             // 
             // statusStripPingDescription
             // 
             this.statusStripPingDescription.Margin = new System.Windows.Forms.Padding(30, 3, 0, 2);
             this.statusStripPingDescription.Name = "statusStripPingDescription";
-            this.statusStripPingDescription.Size = new System.Drawing.Size(34, 17);
+            this.statusStripPingDescription.Size = new System.Drawing.Size(67, 37);
             this.statusStripPingDescription.Text = "Ping:";
             // 
             // statusStripPing
@@ -1413,13 +1563,13 @@ namespace mass_groundstation_v2
             this.statusStripPing.ForeColor = System.Drawing.Color.Red;
             this.statusStripPing.Margin = new System.Windows.Forms.Padding(0, 3, 30, 2);
             this.statusStripPing.Name = "statusStripPing";
-            this.statusStripPing.Size = new System.Drawing.Size(86, 17);
+            this.statusStripPing.Size = new System.Drawing.Size(174, 37);
             this.statusStripPing.Text = "Not connected";
             // 
             // statusStripFlightTime
             // 
             this.statusStripFlightTime.Name = "statusStripFlightTime";
-            this.statusStripFlightTime.Size = new System.Drawing.Size(119, 17);
+            this.statusStripFlightTime.Size = new System.Drawing.Size(247, 32);
             this.statusStripFlightTime.Text = "Flight Time - 00:00:00";
             // 
             // timerStopWatch
@@ -1433,46 +1583,26 @@ namespace mass_groundstation_v2
             this.timerConnectionTest.Interval = 1000;
             this.timerConnectionTest.Tick += new System.EventHandler(this.timerConnectionTest_Tick);
             // 
-            // numCamLiveInterval
+            // btnCamChangeFrameInterval
             // 
-            this.numCamLiveInterval.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numCamLiveInterval.Location = new System.Drawing.Point(353, 39);
-            this.numCamLiveInterval.Maximum = new decimal(new int[] {
-            60000,
-            0,
-            0,
-            0});
-            this.numCamLiveInterval.Name = "numCamLiveInterval";
-            this.numCamLiveInterval.Size = new System.Drawing.Size(68, 20);
-            this.numCamLiveInterval.TabIndex = 11;
-            this.numCamLiveInterval.Value = new decimal(new int[] {
-            3000,
-            0,
-            0,
-            0});
-            this.numCamLiveInterval.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(427, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Frame Interval";
+            this.btnCamChangeFrameInterval.Location = new System.Drawing.Point(706, 95);
+            this.btnCamChangeFrameInterval.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCamChangeFrameInterval.Name = "btnCamChangeFrameInterval";
+            this.btnCamChangeFrameInterval.Size = new System.Drawing.Size(238, 44);
+            this.btnCamChangeFrameInterval.TabIndex = 13;
+            this.btnCamChangeFrameInterval.Text = "Change Frame Interval";
+            this.btnCamChangeFrameInterval.UseVisualStyleBackColor = true;
+            this.btnCamChangeFrameInterval.Click += new System.EventHandler(this.btnCamChangeFrameInterval_Click);
             // 
             // Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1579, 882);
+            this.ClientSize = new System.Drawing.Size(3004, 1696);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControlMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Form";
             this.Text = "MASS Groundstation";
             this.tabControlMain.ResumeLayout(false);
@@ -1515,11 +1645,11 @@ namespace mass_groundstation_v2
             this.tabLogs.PerformLayout();
             this.tabCamera.ResumeLayout(false);
             this.tabCamera.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCamLiveInterval)).EndInit();
             this.groupCameraLive.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLive)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numCamLiveInterval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1644,6 +1774,7 @@ namespace mass_groundstation_v2
         private System.Windows.Forms.CheckBox cbExpUVLock;
         private System.Windows.Forms.NumericUpDown numCamLiveInterval;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnCamChangeFrameInterval;
     }
 }
 
